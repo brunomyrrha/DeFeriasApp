@@ -1,0 +1,172 @@
+lionIdle.png
+format: RGBA4444
+filter: Linear,Linear
+repeat:none
+idle
+       rotate:false
+       xy: 0,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 0
+idle
+       rotate:false
+       xy: 250,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 1
+idle
+       rotate:false
+       xy: 500,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 2
+idle
+       rotate:false
+       xy: 750,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 3
+idle
+       rotate:false
+       xy: 1000,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 4
+idle
+       rotate:false
+       xy: 1250,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 5
+idle
+       rotate:false
+       xy: 1500,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 6
+idle
+       rotate:false
+       xy: 1750,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 7
+idle
+       rotate:false
+       xy: 2000,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 8
+idle
+       rotate:false
+       xy: 2250,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 9
+idle
+       rotate:false
+       xy: 2500,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 10
+idle
+       rotate:false
+       xy: 2750,0
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 11
+idle
+       rotate:false
+       xy: 0,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 12
+idle
+       rotate:false
+       xy: 250,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 13
+idle
+       rotate:false
+       xy: 500,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 14
+idle
+       rotate:false
+       xy: 750,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 15
+idle
+       rotate:false
+       xy: 1000,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 16
+idle
+       rotate:false
+       xy: 1250,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 17
+idle
+       rotate:false
+       xy: 1500,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 18
+idle
+       rotate:false
+       xy: 1750,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 19
+idle
+       rotate:false
+       xy: 2000,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 20
+idle
+       rotate:false
+       xy: 2250,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 21
+idle
+       rotate:false
+       xy: 2500,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 22
+idle
+       rotate:false
+       xy: 2750,250
+       size: 250,250
+       orig: 250,250
+       offset:0 ,0
+       index: 23
