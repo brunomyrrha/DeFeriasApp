@@ -1,169 +1,169 @@
-lionIdle.png
+lionSick.png
 format: RGBA4444
 filter: Linear,Linear
 repeat:none
-lionIdle
+lionSick
        rotate:false
        xy: 0,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 0
-lionIdle
+lionSick
        rotate:false
        xy: 250,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 1
-lionIdle
+lionSick
        rotate:false
        xy: 500,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 2
-lionIdle
+lionSick
        rotate:false
        xy: 750,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 3
-lionIdle
+lionSick
        rotate:false
        xy: 1000,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 4
-lionIdle
+lionSick
        rotate:false
        xy: 1250,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 5
-lionIdle
+lionSick
        rotate:false
        xy: 1500,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 6
-lionIdle
+lionSick
        rotate:false
        xy: 1750,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 7
-lionIdle
+lionSick
        rotate:false
        xy: 2000,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 8
-lionIdle
+lionSick
        rotate:false
        xy: 2250,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 9
-lionIdle
+lionSick
        rotate:false
        xy: 2500,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 10
-lionIdle
+lionSick
        rotate:false
        xy: 2750,0
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 11
-lionIdle
+lionSick
        rotate:false
        xy: 0,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 12
-lionIdle
+lionSick
        rotate:false
        xy: 250,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 13
-lionIdle
+lionSick
        rotate:false
        xy: 500,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 14
-lionIdle
+lionSick
        rotate:false
        xy: 750,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 15
-lionIdle
+lionSick
        rotate:false
        xy: 1000,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 16
-lionIdle
+lionSick
        rotate:false
        xy: 1250,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 17
-lionIdle
+lionSick
        rotate:false
        xy: 1500,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 18
-lionIdle
+lionSick
        rotate:false
        xy: 1750,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 19
-lionIdle
+lionSick
        rotate:false
        xy: 2000,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 20
-lionIdle
+lionSick
        rotate:false
        xy: 2250,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 21
-lionIdle
+lionSick
        rotate:false
        xy: 2500,250
        size: 250,250
        orig: 250,250
        offset:0 ,0
        index: 22
-lionIdle
+lionSick
        rotate:false
        xy: 2750,250
        size: 250,250

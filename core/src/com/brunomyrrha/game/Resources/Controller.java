@@ -21,9 +21,6 @@ public class Controller {
     private OrthographicCamera orthographicCamera;
     private Viewport viewport;
 
-    public boolean isHungerPressed() {
-        return hungerPressed;
-    }
 
     public Controller(OrthographicCamera orthographicCamera, Viewport viewport, float SCALE){
         this.orthographicCamera = orthographicCamera;
@@ -35,9 +32,9 @@ public class Controller {
         table.setFillParent(true);
         table.left().top();
         Image btnFood = new Image(new Texture("btn_food.png"));
-        Image btnHealth = new Image(new Texture("btn_food.png"));
-        Image btnEducation = new Image(new Texture("btn_food.png"));
-        Image btnCulture = new Image(new Texture("btn_food.png"));
+        Image btnHealth = new Image(new Texture("btn_health.png"));
+        Image btnEducation = new Image(new Texture("btn_education.png"));
+        Image btnCulture = new Image(new Texture("btn_culture.png"));
 
         btnFood.setSize(300*(Gdx.graphics.getWidth()*(0.001f)*SCALE),234*(Gdx.graphics.getWidth()*(0.001f)*SCALE));
         btnHealth.setSize(300*(Gdx.graphics.getWidth()*(0.001f)*SCALE),234*(Gdx.graphics.getWidth()*(0.001f)*SCALE));
@@ -47,6 +44,7 @@ public class Controller {
         table.padLeft(Gdx.graphics.getWidth()*.5f-(btnFood.getWidth()));
         table.padTop(Gdx.graphics.getHeight()*.2f-(btnFood.getHeight()));
 
+        //Create Input Listeners
         btnFood.addListener(new InputListener(){
 
             @Override
@@ -60,6 +58,50 @@ public class Controller {
                 hungerPressed = false;
             }
         });
+
+        btnHealth.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                healthPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                healthPressed = false;
+            }
+        });
+
+        btnEducation.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                educationPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                educationPressed = false;
+            }
+        });
+
+        btnCulture.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                culturePressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                culturePressed = false;
+            }
+        });
+
+        //Create Button Table
         table.add(btnFood).size(btnFood.getWidth(),btnFood.getHeight()).pad(5,5,5,5);
         table.add(btnHealth).size(btnFood.getWidth(),btnFood.getHeight()).pad(5,5,5,5);
         table.row();
@@ -70,5 +112,21 @@ public class Controller {
 
     public void draw(){
         stage.draw();
+    }
+
+    public boolean isHungerPressed() {
+        return hungerPressed;
+    }
+
+    public boolean isHealthPressed() {
+        return healthPressed;
+    }
+
+    public boolean isEducationPressed() {
+        return educationPressed;
+    }
+
+    public boolean isCulturePressed() {
+        return culturePressed;
     }
 }

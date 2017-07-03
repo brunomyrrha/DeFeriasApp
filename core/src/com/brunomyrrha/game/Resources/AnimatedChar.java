@@ -33,7 +33,7 @@ public class AnimatedChar extends ApplicationAdapter{
         texture = new Texture(filename+".png");
         textureRegion = new TextureRegion();
         textureAtlas = new TextureAtlas(Gdx.files.internal(filename+".atlas"));
-        Array<TextureAtlas.AtlasRegion> arrayAtlas = textureAtlas.findRegions("idle");
+        Array<TextureAtlas.AtlasRegion> arrayAtlas = textureAtlas.findRegions(filename);
         animation = new Animation<TextureRegion>(FRAME_DURATION,arrayAtlas, Animation.PlayMode.LOOP);
         this.SCALE = SCALE;
     }

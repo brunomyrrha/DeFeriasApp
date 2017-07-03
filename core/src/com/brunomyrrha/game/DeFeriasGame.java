@@ -25,8 +25,6 @@ public class DeFeriasGame extends ApplicationAdapter {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         gsm = new GameStateManager();
-        Gdx.gl.glClearColor(1,0,0,1);
-
         gsm.push(new PlayState(gsm));
     }
 
