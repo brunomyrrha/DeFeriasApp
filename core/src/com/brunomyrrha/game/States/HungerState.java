@@ -4,13 +4,17 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.brunomyrrha.game.GameResources.WordSelector;
 
 /**
  * Created by brunomyrrha on 30/06/2017.
  */
 
 public class HungerState extends State {
-    private float counter = 0;
+    private boolean running = true;
+    float counter = 0;
+
     public HungerState(GameStateManager gsm){
         super(gsm);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -18,14 +22,16 @@ public class HungerState extends State {
 
     @Override
     protected void handleInput() {
-
+        if (Gdx.input.justTouched()){
+            running = false;
+        }
     }
 
     @Override
     public void update(float deltaTime) {
+        handleInput();
         counter += Gdx.graphics.getRawDeltaTime();
-        Gdx.app.debug("Countdown:",counter+"");
-        if (counter > 2){
+        if (counter > .9f){
             gsm.pop();
             this.dispose();
         }

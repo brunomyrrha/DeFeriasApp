@@ -18,11 +18,8 @@ public class PlayState extends State {
     private Viewport viewport;
     private OrthographicCamera orthographicCamera;
 
-    public static boolean SICK = false;
-    public static float counter = 0;
-
     private ImageLoader background, sesc, bgTrees;
-    private AnimatedChar lion, lionSick;
+    private AnimatedChar lion;
     private Controller controller;
 
 
@@ -40,8 +37,7 @@ public class PlayState extends State {
         background = new ImageLoader("bg",1f);
         bgTrees = new ImageLoader("bgTrees",1f);
         sesc = new ImageLoader("sescLogo",1f);
-        lion = new AnimatedChar("lionIdle",.06f,3f);
-      //  lionSick = new AnimatedChar("lionSick",.06f,3f);
+        lion = new AnimatedChar("lionIdle",.06f,2.5f);
 
     }
 
@@ -64,12 +60,6 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         handleInput();
-
-        counter += Gdx.graphics.getRawDeltaTime();
-        Gdx.app.debug("SICK:",SICK+"");
-        if (counter >= 5){
-          SICK = true;
-        }
     }
 
     @Override
@@ -78,17 +68,12 @@ public class PlayState extends State {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        lion.draw();
         batch.draw(background.texture(),0,0,background.width(),background.height());
-        if (SICK){
-      //      lionSick.draw();
-        }else{
-            lion.draw();
-            batch.draw(lion.textureRegion(),lion.centerScreen(),30, lion.width(),lion.height());
-        }
+        batch.draw(lion.textureRegion(),lion.centerScreen(),100, lion.width(),lion.height());
         batch.draw(bgTrees.texture(),bgTrees.centerScreen(),0,bgTrees.width(),bgTrees.height());
         batch.draw(sesc.texture(),sesc.centerScreen(),10,sesc.width(),sesc.height());
         batch.end();
-
         controller.draw();
     }
 

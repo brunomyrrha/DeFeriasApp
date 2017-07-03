@@ -26,10 +26,7 @@ public class HealthState extends State {
         counter += Gdx.graphics.getRawDeltaTime();
         Gdx.app.debug("Countdown:",counter+"");
         if (counter > 2){
-            PlayState.SICK = false;
-            PlayState.counter = 0;
             gsm.pop();
-            this.dispose();
         }
     }
 
