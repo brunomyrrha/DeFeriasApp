@@ -20,7 +20,6 @@ import com.badlogic.gdx.utils.Array;
 public class AnimatedChar extends ApplicationAdapter{
 
     private float TIMEFRAME = 0f;
-
     private static String filename;
     private Texture texture;
     private TextureRegion textureRegion;
