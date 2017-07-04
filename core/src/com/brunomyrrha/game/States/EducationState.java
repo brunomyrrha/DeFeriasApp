@@ -3,12 +3,9 @@ package com.brunomyrrha.game.States;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.brunomyrrha.game.GameResources.EducationGame;
 import com.brunomyrrha.game.GameResources.WordSelector;
 
 /**
@@ -16,54 +13,50 @@ import com.brunomyrrha.game.GameResources.WordSelector;
  */
 
 public class EducationState extends State {
-    public static SpriteBatch batch;
-    private Viewport viewport;
-    private OrthographicCamera orthographicCamera;
-
     private boolean running = true;
     private WordSelector wordSelector;
     private String word;
-    private EducationGame educationGame;
+    private BitmapFont bitmapFont;
+    private SpriteBatch spriteBatch;
+
+
+
+    int i;
+    float counter = 0;
 
     public EducationState(GameStateManager gsm){
         super(gsm);
-
-        batch = new SpriteBatch();
-        orthographicCamera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),orthographicCamera);
-        educationGame = new EducationGame(orthographicCamera,viewport,1f);
+        bitmapFont = new BitmapFont();
         wordSelector = new WordSelector();
         wordSelector.importData();
         word = wordSelector.sortWord();
-        educationGame.setWord(word);
+        i = word.length();
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
     }
 
     @Override
     protected void handleInput() {
-        Gdx.app.log("LOGCAT",word);
-        if (educationGame.gameOver()){
-            gsm.set(new PlayState(gsm));
-            dispose();
-        }
+        Gdx.app.log("LOGCAT",word + " | "+i);
     }
 
     @Override
     public void update(float deltaTime) {
         handleInput();
+        counter += Gdx.graphics.getRawDeltaTime();
+        if (counter > .9f){
+            gsm.pop();
+            this.dispose();
+        }
     }
 
     @Override
     public void render(Stage stage) {
-        update(Gdx.graphics.getDeltaTime());
+        Gdx.gl.glClearColor(0,1,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        educationGame.draw();
     }
-
 
     @Override
     public void dispose() {
-        batch.dispose();
     }
 
 }
