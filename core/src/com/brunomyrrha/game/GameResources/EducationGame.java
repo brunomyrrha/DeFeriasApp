@@ -22,38 +22,31 @@ public class EducationGame {
     private Viewport viewport;
     private Stage stage;
 
-    private TextureAtlas textureAtlas;
-    private TextureRegion textureRegion;
-    private Image image;
+    private CharSelector letter;
     private Table table;
-
-    private int size, winCount;
-    private boolean win = false;
 
     public EducationGame(OrthographicCamera orthographicCamera, Viewport viewport, float SCALE){
         this.orthographicCamera = orthographicCamera;
         this.viewport = viewport;
         stage = new Stage(this.viewport, EducationState.batch);
-        textureAtlas = new TextureAtlas(Gdx.files.internal("letras.atlas"));
         table = new Table();
         table.setFillParent(true);
         Gdx.input.setInputProcessor(stage);
     }
+
     public void setWord(String word){
-        size = word.length();
-        textureRegion = textureAtlas.findRegion(word.charAt(0)+"");
         for (int i = 0; i < 4 ; i++){
             for (int j = 0; j < 4; j++){
-                image = new Image(textureRegion);
-                table.add(image);
+                letter = new CharSelector("a");
+                table.addActor(letter.letter());
             }
             table.row();
         }
-        stage.addActor(table);
+//        stage.addActor(table);
     }
 
     public boolean gameOver(){
-        if (winCount >= size){
+        if (true){
             return true;
         } else {
             return false;
