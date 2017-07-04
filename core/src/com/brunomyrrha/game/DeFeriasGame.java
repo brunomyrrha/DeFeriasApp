@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.brunomyrrha.game.States.EducationState;
 import com.brunomyrrha.game.States.GameStateManager;
 import com.brunomyrrha.game.States.PlayState;
 
@@ -25,7 +26,7 @@ public class DeFeriasGame extends ApplicationAdapter {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         gsm = new GameStateManager();
-        gsm.push(new PlayState(gsm));
+        gsm.push(new EducationState(gsm));
     }
 
     @Override
