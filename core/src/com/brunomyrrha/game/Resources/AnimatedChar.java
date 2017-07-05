@@ -29,7 +29,7 @@ public class AnimatedChar extends ApplicationAdapter{
 
     public AnimatedChar(String filename, float FRAME_DURATION, float SCALE){
         this.filename = filename;
-        texture = new Texture(filename+".png");
+        texture = new Texture(Gdx.files.internal("img/"+filename+".png"));
         textureRegion = new TextureRegion();
         textureAtlas = new TextureAtlas(Gdx.files.internal(filename+".atlas"));
         Array<TextureAtlas.AtlasRegion> arrayAtlas = textureAtlas.findRegions(filename);

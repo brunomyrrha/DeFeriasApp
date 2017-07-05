@@ -31,10 +31,10 @@ public class Controller {
         Table table = new Table();
         table.setFillParent(true);
         table.left().top();
-        Image btnFood = new Image(new Texture("btn_food.png"));
-        Image btnHealth = new Image(new Texture("btn_health.png"));
-        Image btnEducation = new Image(new Texture("btn_education.png"));
-        Image btnCulture = new Image(new Texture("btn_culture.png"));
+        Image btnFood = new Image(new Texture(Gdx.files.internal("img/"+"btn_food.png")));
+        Image btnHealth = new Image(new Texture(Gdx.files.internal("img/"+"btn_health.png")));
+        Image btnEducation = new Image(new Texture(Gdx.files.internal("img/"+"btn_education.png")));
+        Image btnCulture = new Image(new Texture(Gdx.files.internal("img/"+"btn_culture.png")));
 
         btnFood.setSize(300*(Gdx.graphics.getWidth()*(0.001f)*SCALE),234*(Gdx.graphics.getWidth()*(0.001f)*SCALE));
         btnHealth.setSize(300*(Gdx.graphics.getWidth()*(0.001f)*SCALE),234*(Gdx.graphics.getWidth()*(0.001f)*SCALE));

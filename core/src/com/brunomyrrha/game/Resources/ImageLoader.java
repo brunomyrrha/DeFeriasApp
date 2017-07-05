@@ -15,7 +15,7 @@ public class ImageLoader extends com.badlogic.gdx.scenes.scene2d.ui.Image{
 
     public ImageLoader(String filename, float SCALE){
         this.filename = filename;
-        texture = new Texture(filename+".png");
+        texture = new Texture(Gdx.files.internal("img/"+filename+".png"));
         this.SCALE = SCALE;
     }
 

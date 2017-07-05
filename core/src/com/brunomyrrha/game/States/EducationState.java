@@ -2,30 +2,26 @@ package com.brunomyrrha.game.States;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.brunomyrrha.game.GameResources.Letter;
 import com.brunomyrrha.game.GameResources.WordSelector;
 import com.brunomyrrha.game.Resources.ImageLoader;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
-
-import javax.lang.model.element.Element;
 
 /**
  * Created by brunomyrrha on 03/07/2017.
@@ -34,35 +30,51 @@ import javax.lang.model.element.Element;
 public class EducationState extends State {
     private Viewport viewport;
     private SpriteBatch batch;
+
+    private Stage stage;
+    private Skin skin;
+
     private WordSelector wordSelector;
     private String word;
-    private Stage stage;
-    private Table table;
-    private Letter letter;
-    private Image image;
+    private BitmapFont font48;
+
+    private TextureAtlas playStoneAtlas;
+    private ImageButton playStone;
+    private ImageButton.ImageButtonStyle playStoneStyle;
+
     private ImageLoader bg;
-    private boolean clicked;
-    private String done;
+
 
     public EducationState(GameStateManager gsm){
         super(gsm);
+        //Enabling debug
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        //Creating viewports
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch = new SpriteBatch();
+
         stage = new Stage(viewport,batch);
+        skin = new Skin(Gdx.files.internal("ui/uiskin.json"),new TextureAtlas("ui/uiskin.atlas"));
+        //importing and choosing words
         wordSelector = new WordSelector();
         wordSelector.importData();
         word = wordSelector.sortWord();
-        table = new Table();
-        image = new Image();
-        letter = new Letter();
+
+        playStoneStyle = new ImageButton.ImageButtonStyle();
+
+        playStoneStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture("img/stoneButton.png")));
+        playStoneStyle.imageDown = new TextureRegionDrawable(new TextureRegion(new Texture("img/stoneButtonClicked.png")));
+        playStoneStyle.pressedOffsetX = 1;
+        playStoneStyle.pressedOffsetY = -1;
+
+        playStone = new ImageButton(playStoneStyle);
+        stage.addActor(playStone);
+
         bg = new ImageLoader("bg_edu",1f);
-        done = "";
-        table.setFillParent(true);
-        table.top().padTop(40f);
+
+        initFonts();
         generateMatrix(word);
         Gdx.app.log("Palavra:",word);
-        stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -90,25 +102,10 @@ public class EducationState extends State {
         int i = 0;
         for(final Character c: list) {
             if (i > 2){
-                table.row();
+//                table.row();
                 i = 0;
             }
-            image = letter.getImage(c.toString());
-            image.addListener(new InputListener(){
 
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    clicked = true;
-                    done+=c;
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    clicked = false;
-                }
-            });
-            table.add(image).size(image.getWidth()*((Gdx.graphics.getWidth()*0.001f)* .75f),image.getHeight()*((Gdx.graphics.getWidth()*0.001f)* .75f));
             Gdx.app.log("LOG",c.toString());
             i++;
         }
@@ -122,8 +119,7 @@ public class EducationState extends State {
     @Override
     public void update(float deltaTime) {
         handleInput();
-        if (word.equals(done)) {
-
+        if (word.equals(true)) {
             gsm.pop();
             gsm.push(new PlayState(gsm));
             dispose();
@@ -135,13 +131,24 @@ public class EducationState extends State {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(bg.texture(),0,0,bg.width(),bg.height());
+        font48.draw(batch,"Teste",100,100);
         batch.end();
         this.stage.draw();
     }
 
     @Override
     public void dispose() {
-        stage.dispose();
+        this.stage.dispose();
+        batch.dispose();
+        font48.dispose();
     }
 
+    private void initFonts(){
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.size = 48;
+        params.color = Color.GREEN;
+        params.shadowColor = Color.BLACK;
+        font48 = generator.generateFont(params);
+    }
 }
