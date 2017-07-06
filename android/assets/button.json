@@ -1,0 +1,15 @@
+{
+  com.badlogic.gdx.graphics.g2d.BitmapFont: {
+    default-font: {
+      file: fonts/default.fnt
+    }
+},
+  com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+    default: {
+      down: clicked, up: not-clicked
+    },
+    toggle: {
+      down: clicked, checked: clicked, up: not-clicked
+    }
+  },
+}

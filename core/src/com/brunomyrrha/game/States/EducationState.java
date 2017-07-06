@@ -38,7 +38,8 @@ public class EducationState extends State {
     private String word;
     private BitmapFont font48;
 
-    private TextureAtlas playStoneAtlas;
+    private TextButton teste;
+
     private ImageButton playStone;
     private ImageButton.ImageButtonStyle playStoneStyle;
 
