@@ -2,24 +2,14 @@ package com.brunomyrrha.game.States;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -39,13 +29,13 @@ public class EducationState extends State {
     private Skin skin;
     private Table table;
     private TextButton button, buttonRight;
+    private Array<TextButton> matrix;
 
     private WordSelector wordSelector;
     private String word;
-
+    private int newLine = 0;
     private ImageLoader bg;
-
-    private String answer = "0";
+    private int answer = 0;
 
     public EducationState(GameStateManager gsm){
         super(gsm);
@@ -66,6 +56,7 @@ public class EducationState extends State {
         wordSelector = new WordSelector();
         wordSelector.importData();
         word = wordSelector.sortWord();
+        matrix = new Array<TextButton>();
         bg = new ImageLoader("bg_edu",1f);
         generateMatrix(word);
 
@@ -75,82 +66,107 @@ public class EducationState extends State {
     }
 
     public void generateMatrix(final String word) {
-        Array <Character> list = new Array<Character>();
         Random rand = new Random();
         String base = "abcdefghijklmnopqrstuvwxyz";
-        Character value;
 
-        for (int i = 0; i < word.length(); i++) {
-            list.add(word.charAt(i));
+        //Add the correct buttons to matrix.
+        for (int i = 0; i < word.length(); i++){
             buttonRight = new TextButton(word.charAt(i)+"",skin,"toggle");
             buttonRight.getLabel().setFontScale(2,2);
+            buttonRight.addListener(new InputListener(){
+
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+                }
+            });
+            matrix.add(buttonRight);
         }
 
-        for (int i = word.length(); i < 9; i++){
-            value = base.charAt(rand.nextInt(base.length()));
-
-            for (Character c : list){
-                while (value == c){
-                    value = base.charAt(rand.nextInt(base.length()));
+        //Add the wrong buttons to matrix.
+        for (int i = word.length(); i <9; i++){
+            Character c = base.charAt(rand.nextInt(base.length()-1));
+            for (int j = 0; j < word.length(); j++){
+                while(c.equals(word.charAt(j))){
+                    c = base.charAt(rand.nextInt(base.length()-1));
                 }
             }
-            list.add(value);
-        }
-        list.shuffle();
-        int i = 0;
-        for(final Character c: list) {
-            if (i > 2){
-                table.row();
-                i = 0;
-            }
-            button = new TextButton(c.toString(),skin,"default");
+            button = new TextButton(c+"",skin,"default");
             button.getLabel().setFontScale(2,2);
             button.addListener(new InputListener(){
 
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    check(c);
-                    return false;
+                    reset();
+                    return true;
                 }
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 }
             });
-            table.add(button);
-            i++;
+            matrix.add(button);
         }
-    }
 
+        //Shuffle buttons.
+        matrix.shuffle();
 
-    private void check(Character c) {
-        if (word.contains(c.toString())) {
-            if (answer.equals("0")) {
-                answer = "";
+        //Add buttons to table.
+        for (TextButton tb : matrix){
+            if (newLine == 3){
+                table.row();
+                newLine = 0;
             }
-            answer += c;
-            Gdx.app.log("LOGCAT", answer);
-            Gdx.app.log("LOGCAT", word.indexOf(c.toString()) + "");
-        } else {
-            answer = "0";
-            Gdx.app.log("LOGCAT", answer);
+            table.add(tb);
+            newLine++;
         }
     }
 
+    private void countToggle(){
+        answer = 0;
+        for(TextButton tb : matrix){
+            if(tb.isChecked()){
+                if(word.contains(tb.getText())) {
+                    answer++;
+                }
+            }
+        }
+    }
+
+    private void reset() {
+        for (TextButton tb : matrix){
+            if (tb.isChecked()){
+                tb.toggle();
+            }
+        }
+    }
+
+    public boolean win(){
+        if(word.length() == answer){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @Override
     protected void handleInput() {
-
+        countToggle();
+        if (win()){
+            gsm.pop();
+            gsm.push(new PlayState(gsm));
+            dispose();
+        }
     }
 
     @Override
     public void update(float deltaTime) {
         handleInput();
-        if ((word.contains(answer)) && (word.length() == answer.length())){
-            gsm.pop();
-            gsm.push(new PlayState(gsm));
-            dispose();
-        }
     }
 
     @Override
