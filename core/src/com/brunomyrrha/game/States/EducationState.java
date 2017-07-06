@@ -2,11 +2,15 @@ package com.brunomyrrha.game.States;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -15,7 +19,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.game.GameResources.WordSelector;
 import com.brunomyrrha.game.Resources.ImageLoader;
-
 import java.util.Random;
 
 /**
@@ -25,17 +28,26 @@ import java.util.Random;
 public class EducationState extends State {
     private Viewport viewport;
     private SpriteBatch batch;
-    private Stage stage;
+    private Stage stage,victory;
     private Skin skin;
-    private Table table;
-    private TextButton button, buttonRight;
-    private Array<TextButton> matrix;
+    private Table table, tipTable;
 
+    private FreeTypeFontGenerator generator;
+    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    private BitmapFont font72;
+    private Label label;
+    private Label.LabelStyle style;
+
+    private Array<TextButton> matrix;
+    private ImageLoader bg, answerTable;
+    private TextButton button, buttonRight;
     private WordSelector wordSelector;
     private String word;
+    private Array<Character> wordMatrix;
     private int newLine = 0;
-    private ImageLoader bg;
     private int answer = 0;
+    private String returnText;
+    private float SCALE;
 
     public EducationState(GameStateManager gsm){
         super(gsm);
@@ -44,13 +56,25 @@ public class EducationState extends State {
 
         //Creating viewports
         viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        SCALE = (Gdx.graphics.getWidth()*.001f)*2;
         batch = new SpriteBatch();
         stage = new Stage(viewport,batch);
-
+        victory = new Stage(viewport,batch);
         skin = new Skin(Gdx.files.internal("button.json"));
-
         table = new Table();
         table.setFillParent(true);
+        tipTable = new Table();
+        tipTable.setFillParent(true);
+        tipTable.top();
+
+        //Generate text fonts
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 72;
+        parameter.color = Color.GREEN;
+        font72 = generator.generateFont(parameter);
+        generator.dispose();
+
 
         //importing and choosing words
         wordSelector = new WordSelector();
@@ -58,8 +82,19 @@ public class EducationState extends State {
         word = wordSelector.sortWord();
         matrix = new Array<TextButton>();
         bg = new ImageLoader("bg_edu",1f);
+        answerTable = new ImageLoader("answerTable",.9f);
+        wordMatrix = new Array<Character>();
         generateMatrix(word);
 
+        //generating text
+        style = new Label.LabelStyle();
+        style.font = font72;
+        label = new Label("",style);
+        tipTable.pad(Gdx.graphics.getHeight()*.115f-tipTable.getHeight());
+        tipTable.padRight(Gdx.graphics.getWidth()*.5f-label.getWidth());
+
+        //Getting game stage done
+        stage.addActor(tipTable);
         stage.addActor(table);
         Gdx.app.log("Palavra:",word);
         Gdx.input.setInputProcessor(stage);
@@ -67,12 +102,13 @@ public class EducationState extends State {
 
     public void generateMatrix(final String word) {
         Random rand = new Random();
-        String base = "abcdefghijklmnopqrstuvwxyz";
+        String base = "abcdefghijlmnopqrstuvxz";
 
         //Add the correct buttons to matrix.
         for (int i = 0; i < word.length(); i++){
+            wordMatrix.add(word.charAt(i));
             buttonRight = new TextButton(word.charAt(i)+"",skin,"toggle");
-            buttonRight.getLabel().setFontScale(2,2);
+            buttonRight.getLabel().setFontScale(SCALE);
             buttonRight.addListener(new InputListener(){
 
                 @Override
@@ -82,22 +118,20 @@ public class EducationState extends State {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
                 }
             });
             matrix.add(buttonRight);
         }
 
         //Add the wrong buttons to matrix.
-        for (int i = word.length(); i <9; i++){
+        for (int i = word.length(); i < 9; i++) {
             Character c = base.charAt(rand.nextInt(base.length()-1));
-            for (int j = 0; j < word.length(); j++){
-                while(c.equals(word.charAt(j))){
-                    c = base.charAt(rand.nextInt(base.length()-1));
-                }
+            while (wordMatrix.contains(c,true)){
+                c = base.charAt(rand.nextInt(base.length()-1));
             }
+            wordMatrix.add(c);
             button = new TextButton(c+"",skin,"default");
-            button.getLabel().setFontScale(2,2);
+            button.getLabel().setFontScale(SCALE);
             button.addListener(new InputListener(){
 
                 @Override
@@ -122,34 +156,46 @@ public class EducationState extends State {
                 table.row();
                 newLine = 0;
             }
-            table.add(tb);
+            table.add(tb).size((SCALE*button.getWidth()*.4f),(SCALE*button.getHeight()*.4f));
             newLine++;
         }
     }
 
     private void countToggle(){
         answer = 0;
+        returnText = "";
+        tipTable.removeActor(label);
         for(TextButton tb : matrix){
             if(tb.isChecked()){
                 if(word.contains(tb.getText())) {
                     answer++;
+                    label.setText(organize(tb.getText().toString()));
+                    tipTable.add(label).size(label.getWidth(), label.getHeight());
                 }
             }
         }
+    }
+
+    private String organize(String text){
+        String response = "";
+        
+        return response;
     }
 
     private void reset() {
         for (TextButton tb : matrix){
             if (tb.isChecked()){
                 tb.toggle();
+                tipTable.removeActor(label);
             }
         }
+        tipTable.removeActor(label);
     }
 
-    public boolean win(){
-        if(word.length() == answer){
+    public boolean win() {
+        if (word.length() == answer) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -158,9 +204,11 @@ public class EducationState extends State {
     protected void handleInput() {
         countToggle();
         if (win()){
-            gsm.pop();
-            gsm.push(new PlayState(gsm));
-            dispose();
+            if(Gdx.input.justTouched()) {
+                dispose();
+                gsm.pop();
+                gsm.push(new PlayState(gsm));
+            }
         }
     }
 
@@ -171,17 +219,18 @@ public class EducationState extends State {
 
     @Override
     public void render(Stage stage) {
+        stage = this.stage;
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(bg.texture(),0,0,bg.width(),bg.height());
+        batch.draw(answerTable.texture(),answerTable.centerScreen(),(Gdx.graphics.getHeight()-(answerTable.height())),answerTable.width(),answerTable.height());
         batch.end();
-        this.stage.draw();
+        stage.draw();
     }
 
     @Override
     public void dispose() {
-        this.stage.dispose();
+        stage.dispose();
         batch.dispose();
     }
-
 }

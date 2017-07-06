@@ -42,8 +42,5 @@ public class DeFeriasGame extends ApplicationAdapter {
 
     @Override
     public void dispose (){
-
-
     }
-
 }
