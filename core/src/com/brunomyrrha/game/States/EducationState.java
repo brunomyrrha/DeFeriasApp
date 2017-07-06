@@ -38,7 +38,7 @@ public class EducationState extends State {
     private Stage stage;
     private Skin skin;
     private Table table;
-    private TextButton button;
+    private TextButton button, buttonRight;
 
     private WordSelector wordSelector;
     private String word;
@@ -82,6 +82,8 @@ public class EducationState extends State {
 
         for (int i = 0; i < word.length(); i++) {
             list.add(word.charAt(i));
+            buttonRight = new TextButton(word.charAt(i)+"",skin,"toggle");
+            buttonRight.getLabel().setFontScale(2,2);
         }
 
         for (int i = word.length(); i < 9; i++){
@@ -108,7 +110,7 @@ public class EducationState extends State {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     check(c);
-                    return true;
+                    return false;
                 }
 
                 @Override
