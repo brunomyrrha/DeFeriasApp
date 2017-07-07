@@ -37,7 +37,7 @@ public class EducationVictory extends com.brunomyrrha.game.Resources.State {
     @Override
     public void render(Stage stage) {
         batch.begin();
-        batch.draw(bg.texture(),0,0);
+        batch.draw(bg.texture(),0,0,bg.width(),bg.height());
         batch.draw(victoryStar.texture(),victoryStar.centerScreen(),(Gdx.graphics.getHeight()-victoryStar.height()-50f),victoryStar.width(),victoryStar.height());
         batch.draw(btnOk.texture(),btnOk.centerScreen(),(Gdx.graphics.getHeight()*.1f),btnOk.width(),btnOk.height());
         batch.end();
