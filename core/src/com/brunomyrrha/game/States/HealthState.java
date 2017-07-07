@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Created by brunomyrrha on 30/06/2017.
  */
 
-public class HealthState extends State {
+public class HealthState extends com.brunomyrrha.game.Resources.State {
     private float counter = 0;
-    public HealthState(GameStateManager gsm){
+    public HealthState(com.brunomyrrha.game.Resources.GameStateManager gsm){
         super(gsm);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
     }

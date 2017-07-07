@@ -1,5 +1,6 @@
-package com.brunomyrrha.game.States;
+package com.brunomyrrha.game.Resources;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.Stack;
@@ -21,6 +22,7 @@ public class GameStateManager  {
 
     public void pop(){
         states.pop();
+        Gdx.app.log("STACK:",states.size()+"");
     }
 
     public void set(State state){

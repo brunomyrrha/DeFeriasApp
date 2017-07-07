@@ -2,7 +2,6 @@ package com.brunomyrrha.game.GameResources;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 
@@ -20,7 +19,6 @@ public class WordSelector {
         file = Gdx.files.internal("lista.txt");
         wordbase = new Array<String>();
         rand = new Random ();
-        Table table = new Table();
         importData();
     }
 

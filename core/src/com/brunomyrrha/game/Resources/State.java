@@ -1,4 +1,4 @@
-package com.brunomyrrha.game.States;
+package com.brunomyrrha.game.Resources;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
@@ -11,9 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public abstract class State {
     protected OrthographicCamera cam;
     protected Vector3 mouse;
-    protected GameStateManager gsm;
+    protected com.brunomyrrha.game.Resources.GameStateManager gsm;
 
-    protected State(GameStateManager gsm){
+    protected State(com.brunomyrrha.game.Resources.GameStateManager gsm){
         this.gsm = gsm;
         cam = new OrthographicCamera();
         mouse = new Vector3();

@@ -19,6 +19,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.game.GameResources.WordSelector;
 import com.brunomyrrha.game.Resources.ImageLoader;
+import com.brunomyrrha.game.Resources.*;
+import com.brunomyrrha.game.GameResources.*;
 import java.util.Random;
 
 /**
@@ -42,15 +44,15 @@ public class EducationState extends State {
     private ImageLoader bg, answerTable;
     private TextButton button, buttonRight;
     private WordSelector wordSelector;
-    private String word;
+    private String word, returnText;
     private Array<Character> wordMatrix;
     private int newLine = 0;
     private int answer = 0;
-    private String returnText;
     private float SCALE;
 
     public EducationState(GameStateManager gsm){
         super(gsm);
+
         //Enabling debug
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
@@ -66,11 +68,12 @@ public class EducationState extends State {
         tipTable = new Table();
         tipTable.setFillParent(true);
         tipTable.top();
+        tipTable.left();
 
         //Generate text fonts
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 72;
+        parameter.size = Math.round(100*(Gdx.graphics.getWidth()*.001f));
         parameter.color = Color.GREEN;
         font72 = generator.generateFont(parameter);
         generator.dispose();
@@ -90,8 +93,8 @@ public class EducationState extends State {
         style = new Label.LabelStyle();
         style.font = font72;
         label = new Label("",style);
-        tipTable.pad(Gdx.graphics.getHeight()*.115f-tipTable.getHeight());
-        tipTable.padRight(Gdx.graphics.getWidth()*.5f-label.getWidth());
+        tipTable.padTop(Gdx.graphics.getHeight()*.115f);
+        tipTable.padLeft(Gdx.graphics.getWidth()*.28f);
 
         //Getting game stage done
         stage.addActor(tipTable);
@@ -108,16 +111,16 @@ public class EducationState extends State {
         for (int i = 0; i < word.length(); i++){
             wordMatrix.add(word.charAt(i));
             buttonRight = new TextButton(word.charAt(i)+"",skin,"toggle");
+            buttonRight.setName(word.charAt(i)+"");
             buttonRight.getLabel().setFontScale(SCALE);
             buttonRight.addListener(new InputListener(){
-
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
                 }
-
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
                 }
             });
             matrix.add(buttonRight);
@@ -133,7 +136,6 @@ public class EducationState extends State {
             button = new TextButton(c+"",skin,"default");
             button.getLabel().setFontScale(SCALE);
             button.addListener(new InputListener(){
-
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     reset();
@@ -163,23 +165,17 @@ public class EducationState extends State {
 
     private void countToggle(){
         answer = 0;
-        returnText = "";
+        returnText = word.length()+" letras";
         tipTable.removeActor(label);
+        label.setText(returnText);
+        tipTable.add(label).size(label.getWidth(), label.getHeight());
         for(TextButton tb : matrix){
             if(tb.isChecked()){
                 if(word.contains(tb.getText())) {
                     answer++;
-                    label.setText(organize(tb.getText().toString()));
-                    tipTable.add(label).size(label.getWidth(), label.getHeight());
                 }
             }
         }
-    }
-
-    private String organize(String text){
-        String response = "";
-        
-        return response;
     }
 
     private void reset() {
@@ -204,11 +200,7 @@ public class EducationState extends State {
     protected void handleInput() {
         countToggle();
         if (win()){
-            if(Gdx.input.justTouched()) {
-                dispose();
-                gsm.pop();
-                gsm.push(new PlayState(gsm));
-            }
+            gsm.set(new EducationVictory(gsm,word));
         }
     }
 

@@ -8,9 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.brunomyrrha.game.Resources.AnimatedChar;
-import com.brunomyrrha.game.Resources.Controller;
-import com.brunomyrrha.game.Resources.ImageLoader;
+import com.brunomyrrha.game.Resources.*;
+import com.brunomyrrha.game.Resources.State;
 
 
 public class PlayState extends State {
@@ -23,7 +22,7 @@ public class PlayState extends State {
     private Controller controller;
 
 
-    public PlayState(GameStateManager gsm)
+    public PlayState(com.brunomyrrha.game.Resources.GameStateManager gsm)
     {
         super(gsm);
         //Enable debug for Logcat

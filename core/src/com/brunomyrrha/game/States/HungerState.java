@@ -9,11 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Created by brunomyrrha on 30/06/2017.
  */
 
-public class HungerState extends State {
+public class HungerState extends com.brunomyrrha.game.Resources.State {
     private boolean running = true;
     float counter = 0;
 
-    public HungerState(GameStateManager gsm){
+    public HungerState(com.brunomyrrha.game.Resources.GameStateManager gsm){
         super(gsm);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
     }
