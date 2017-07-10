@@ -23,6 +23,8 @@ import com.brunomyrrha.game.Resources.*;
 import com.brunomyrrha.game.GameResources.*;
 import java.util.Random;
 
+import static com.brunomyrrha.game.DeFeriasGame.font;
+
 /**
  * Created by brunomyrrha on 03/07/2017.
  */
@@ -33,13 +35,7 @@ public class EducationState extends State {
     private Stage stage;
     private Skin skin;
     private Table table, tipTable;
-
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
-    private BitmapFont font72;
     private Label label;
-    private Label.LabelStyle style;
-
     private Array<TextButton> matrix, correctAnswer;
     private ImageLoader bg, answerTable;
     private TextButton button, buttonRight;
@@ -70,14 +66,6 @@ public class EducationState extends State {
         tipTable.left();
 
         //Generate text fonts
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = Math.round(100*(Gdx.graphics.getWidth()*.001f));
-        parameter.color = Color.valueOf("#7ac144");
-        parameter.borderColor = Color.valueOf("#0e8040");
-        parameter.borderWidth = 3f;
-        font72 = generator.generateFont(parameter);
-        generator.dispose();
 
 
         //importing and choosing words
@@ -92,10 +80,6 @@ public class EducationState extends State {
         generateMatrix(word);
 
         //generating text
-        style = new Label.LabelStyle();
-        style.font = font72;
-
-        label = new Label("",style);
         tipTable.padTop(Gdx.graphics.getHeight()*.115f);
         tipTable.padLeft(Gdx.graphics.getWidth()*.28f);
 
@@ -168,6 +152,7 @@ public class EducationState extends State {
     }
 
     private void countToggle(){
+        label = font.getLabel("");
         answer = 0;
         returnText = word.length()+" letras";
         tipTable.removeActor(label);
@@ -183,10 +168,10 @@ public class EducationState extends State {
     }
 
     private void reset() {
+        Gdx.input.vibrate(500);
         for (TextButton tb : matrix){
             if (tb.isChecked()){
                 tb.toggle();
-                Gdx.input.vibrate(500);
                 tipTable.removeActor(label);
             }
         }
@@ -205,7 +190,7 @@ public class EducationState extends State {
     protected void handleInput() {
         countToggle();
         if (win()){
-            gsm.push(new EducationVictory(gsm,word));
+            gsm.set(new EducationVictory(gsm,word));
         }
     }
 

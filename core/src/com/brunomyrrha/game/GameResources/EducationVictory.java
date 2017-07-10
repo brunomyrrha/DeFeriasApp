@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.brunomyrrha.game.DeFeriasGame;
 import com.brunomyrrha.game.Resources.GameStateManager;
+import com.brunomyrrha.game.Resources.GenerateFont;
 import com.brunomyrrha.game.Resources.ImageLoader;
 import com.brunomyrrha.game.Resources.State;
 import com.brunomyrrha.game.States.PlayState;
@@ -22,19 +24,12 @@ public class EducationVictory extends State {
     private ImageLoader btnOk, bg, victoryStar, answer;
     private String word;
     private Table table;
-    private Label label;
-    private Label.LabelStyle style;
     private Stage stage;
-
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
-    private BitmapFont font72;
 
     public EducationVictory(GameStateManager gsm,String word) {
         super(gsm);
         batch = new SpriteBatch();
         stage = new Stage();
-
         this.word = word;
         table = new Table();
         answer = new ImageLoader("answerTable",.9f);
@@ -43,19 +38,7 @@ public class EducationVictory extends State {
         victoryStar = new ImageLoader("parabens_star",.8f);
 
         //Generate text fonts
-        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = Math.round(100*(Gdx.graphics.getWidth()*.001f));
-        parameter.color = Color.valueOf("#7ac144");
-        parameter.borderColor = Color.valueOf("#0e8040");
-        parameter.borderWidth = 3f;
-        font72 = generator.generateFont(parameter);
-        generator.dispose();
-
-        style = new Label.LabelStyle();
-        style.font = font72;
-        label = new Label(word,style);
-        table.add(label);
+        table.add(DeFeriasGame.font.getLabel(word));
         table.setFillParent(true);
         table.pad(Gdx.graphics.getHeight()*.4f);
         stage.addActor(table);

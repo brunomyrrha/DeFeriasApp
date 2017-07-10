@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.brunomyrrha.game.GameResources.EducationVictory;
+import com.brunomyrrha.game.Resources.GenerateFont;
 import com.brunomyrrha.game.States.EducationState;
 import com.brunomyrrha.game.Resources.GameStateManager;
 import com.brunomyrrha.game.States.PlayState;
@@ -16,6 +17,7 @@ import com.brunomyrrha.game.States.PlayState;
  */
 
 public class DeFeriasGame extends ApplicationAdapter {
+    public static GenerateFont font;
     public static final int WIDTH = 480;
     public static final int HEIGHT = 800;
     public static final String TITLE = "De Férias - O Jogo";
@@ -32,6 +34,7 @@ public class DeFeriasGame extends ApplicationAdapter {
         Gdx.input.setInputProcessor(stage);
         gsm = new GameStateManager();
         gsm.push(new PlayState(gsm));
+        font = new GenerateFont();
     }
 
     @Override

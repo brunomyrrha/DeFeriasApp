@@ -17,6 +17,10 @@ public class GenerateFont {
     private Label label;
     private Label.LabelStyle style;
 
+    public GenerateFont(){
+        create();
+    }
+
     private void create(){
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -25,6 +29,8 @@ public class GenerateFont {
         parameter.borderColor = Color.valueOf("#0e8040");
         parameter.borderWidth = 3f;
         font = generator.generateFont(parameter);
+        style = new Label.LabelStyle();
+        style.font = font;
         generator.dispose();
     }
 
