@@ -2,11 +2,8 @@ package com.brunomyrrha.game.States;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.game.GameResources.WordSelector;
 import com.brunomyrrha.game.Resources.ImageLoader;
 import com.brunomyrrha.game.Resources.*;
@@ -30,8 +25,6 @@ import static com.brunomyrrha.game.DeFeriasGame.font;
  */
 
 public class EducationState extends State {
-    private Viewport viewport;
-    private SpriteBatch batch;
     private Stage stage;
     private Skin skin;
     private Table table, tipTable;
@@ -53,10 +46,8 @@ public class EducationState extends State {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         //Creating viewports
-        viewport = new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         SCALE = (Gdx.graphics.getWidth()*.001f)*2;
-        batch = new SpriteBatch();
-        stage = new Stage(viewport,batch);
+        stage = new Stage();
         skin = new Skin(Gdx.files.internal("button.json"));
         table = new Table();
         table.setFillParent(true);
@@ -64,9 +55,6 @@ public class EducationState extends State {
         tipTable.setFillParent(true);
         tipTable.top();
         tipTable.left();
-
-        //Generate text fonts
-
 
         //importing and choosing words
         wordSelector = new WordSelector();
@@ -190,6 +178,7 @@ public class EducationState extends State {
     protected void handleInput() {
         countToggle();
         if (win()){
+            dispose();
             gsm.set(new EducationVictory(gsm,word));
         }
     }
@@ -200,19 +189,19 @@ public class EducationState extends State {
     }
 
     @Override
-    public void render(Stage stage) {
-        stage = this.stage;
+    public void render(SpriteBatch sb) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.draw(bg.texture(),0,0,bg.width(),bg.height());
-        batch.draw(answerTable.texture(),answerTable.centerScreen(),(Gdx.graphics.getHeight()-(answerTable.height())),answerTable.width(),answerTable.height());
-        batch.end();
+        sb.begin();
+        sb.draw(bg.texture(),0,0,bg.width(),bg.height());
+        sb.draw(answerTable.texture(),answerTable.centerScreen(),(Gdx.graphics.getHeight()-(answerTable.height())),answerTable.width(),answerTable.height());
+        sb.end();
         stage.draw();
     }
 
     @Override
     public void dispose() {
         stage.dispose();
-        batch.dispose();
+        bg.dispose();
+        answerTable.dispose();
     }
 }

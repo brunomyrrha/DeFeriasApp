@@ -1,6 +1,7 @@
 package com.brunomyrrha.game.Resources;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.Stack;
@@ -21,8 +22,9 @@ public class GameStateManager  {
     }
 
     public void pop(){
+        states.peek().dispose();
         states.pop();
-        Gdx.app.log("STACK:",states.size()+"");
+
     }
 
     public void set(State state){
@@ -34,7 +36,7 @@ public class GameStateManager  {
         states.peek().update(deltaTime);
     }
 
-    public void render (Stage stage){
-        states.peek().render(stage);
+    public void render (SpriteBatch sb){
+        states.peek().render(sb);
     }
 }

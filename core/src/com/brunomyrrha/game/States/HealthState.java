@@ -3,13 +3,15 @@ package com.brunomyrrha.game.States;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.brunomyrrha.game.Resources.State;
 
 /**
  * Created by brunomyrrha on 30/06/2017.
  */
 
-public class HealthState extends com.brunomyrrha.game.Resources.State {
+public class HealthState extends State {
     private float counter = 0;
     public HealthState(com.brunomyrrha.game.Resources.GameStateManager gsm){
         super(gsm);
@@ -31,7 +33,7 @@ public class HealthState extends com.brunomyrrha.game.Resources.State {
     }
 
     @Override
-    public void render(Stage stage) {
+    public void render(SpriteBatch sb) {
         Gdx.gl.glClearColor(0,0,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

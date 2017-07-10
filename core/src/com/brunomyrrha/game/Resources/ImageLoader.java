@@ -26,6 +26,10 @@ public class ImageLoader extends com.badlogic.gdx.scenes.scene2d.ui.Image{
     public float centerScreen (){
         return (Gdx.graphics.getWidth()*.5f)-(((Gdx.graphics.getWidth()*(0.001f)*SCALE)*texture.getWidth())*.5f);
     }
+
+    public void dispose(){
+        texture.dispose();
+    }
     public float width(){
         return (Gdx.graphics.getWidth()*(0.001f)*SCALE)*texture.getWidth();
     }

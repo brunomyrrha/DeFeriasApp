@@ -1,16 +1,11 @@
 package com.brunomyrrha.game.GameResources;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.brunomyrrha.game.DeFeriasGame;
 import com.brunomyrrha.game.Resources.GameStateManager;
-import com.brunomyrrha.game.Resources.GenerateFont;
 import com.brunomyrrha.game.Resources.ImageLoader;
 import com.brunomyrrha.game.Resources.State;
 import com.brunomyrrha.game.States.PlayState;
@@ -30,6 +25,7 @@ public class EducationVictory extends State {
         super(gsm);
         batch = new SpriteBatch();
         stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         this.word = word;
         table = new Table();
         answer = new ImageLoader("answerTable",.9f);
@@ -58,18 +54,19 @@ public class EducationVictory extends State {
     }
 
     @Override
-    public void render(Stage stage) {
-        batch.begin();
-        batch.draw(bg.texture(),0,0,bg.width(),bg.height());
-        batch.draw(victoryStar.texture(),victoryStar.centerScreen(),(Gdx.graphics.getHeight()-victoryStar.height()-50f),victoryStar.width(),victoryStar.height());
-        batch.draw(btnOk.texture(),btnOk.centerScreen(),(Gdx.graphics.getHeight()*.1f),btnOk.width(),btnOk.height());
-        batch.draw(answer.texture(),answer.centerScreen(),Gdx.graphics.getHeight()*.42f,answer.width(),answer.height());
-        batch.end();
-        this.stage.draw();
+    public void render(SpriteBatch sb) {
+        sb.begin();
+        sb.draw(bg.texture(),0,0,bg.width(),bg.height());
+        sb.draw(victoryStar.texture(),victoryStar.centerScreen(),(Gdx.graphics.getHeight()-victoryStar.height()-50f),victoryStar.width(),victoryStar.height());
+        sb.draw(btnOk.texture(),btnOk.centerScreen(),(Gdx.graphics.getHeight()*.1f),btnOk.width(),btnOk.height());
+        sb.draw(answer.texture(),answer.centerScreen(),Gdx.graphics.getHeight()*.42f,answer.width(),answer.height());
+        sb.end();
+        stage.draw();
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
+        stage.dispose();
+
     }
 }
