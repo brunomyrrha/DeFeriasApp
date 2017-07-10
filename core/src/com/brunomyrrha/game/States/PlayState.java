@@ -43,16 +43,16 @@ public class PlayState extends State {
     @Override
     public void handleInput() {
         if(controller.isHungerPressed()) {
-            gsm.push(new HungerState(gsm));
+            gsm.set(new HungerState(gsm));
         }
         if(controller.isHealthPressed()) {
-            gsm.push(new HealthState(gsm));
+            gsm.set(new HealthState(gsm));
         }
         if(controller.isCulturePressed()) {
-            gsm.push(new CultureState(gsm));
+            gsm.set(new CultureState(gsm));
         }
         if(controller.isEducationPressed()) {
-            gsm.push(new EducationState(gsm));
+            gsm.set(new EducationState(gsm));
         }
     }
 

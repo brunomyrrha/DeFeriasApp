@@ -30,7 +30,7 @@ import java.util.Random;
 public class EducationState extends State {
     private Viewport viewport;
     private SpriteBatch batch;
-    private Stage stage,victory;
+    private Stage stage;
     private Skin skin;
     private Table table, tipTable;
 
@@ -40,7 +40,7 @@ public class EducationState extends State {
     private Label label;
     private Label.LabelStyle style;
 
-    private Array<TextButton> matrix;
+    private Array<TextButton> matrix, correctAnswer;
     private ImageLoader bg, answerTable;
     private TextButton button, buttonRight;
     private WordSelector wordSelector;
@@ -61,7 +61,6 @@ public class EducationState extends State {
         SCALE = (Gdx.graphics.getWidth()*.001f)*2;
         batch = new SpriteBatch();
         stage = new Stage(viewport,batch);
-        victory = new Stage(viewport,batch);
         skin = new Skin(Gdx.files.internal("button.json"));
         table = new Table();
         table.setFillParent(true);
@@ -74,7 +73,9 @@ public class EducationState extends State {
         generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = Math.round(100*(Gdx.graphics.getWidth()*.001f));
-        parameter.color = Color.GREEN;
+        parameter.color = Color.valueOf("#7ac144");
+        parameter.borderColor = Color.valueOf("#0e8040");
+        parameter.borderWidth = 3f;
         font72 = generator.generateFont(parameter);
         generator.dispose();
 
@@ -84,6 +85,7 @@ public class EducationState extends State {
         wordSelector.importData();
         word = wordSelector.sortWord();
         matrix = new Array<TextButton>();
+        correctAnswer = new Array<TextButton>();
         bg = new ImageLoader("bg_edu",1f);
         answerTable = new ImageLoader("answerTable",.9f);
         wordMatrix = new Array<Character>();
@@ -92,6 +94,7 @@ public class EducationState extends State {
         //generating text
         style = new Label.LabelStyle();
         style.font = font72;
+
         label = new Label("",style);
         tipTable.padTop(Gdx.graphics.getHeight()*.115f);
         tipTable.padLeft(Gdx.graphics.getWidth()*.28f);
@@ -124,6 +127,7 @@ public class EducationState extends State {
                 }
             });
             matrix.add(buttonRight);
+            correctAnswer.add(buttonRight);
         }
 
         //Add the wrong buttons to matrix.
@@ -182,6 +186,7 @@ public class EducationState extends State {
         for (TextButton tb : matrix){
             if (tb.isChecked()){
                 tb.toggle();
+                Gdx.input.vibrate(500);
                 tipTable.removeActor(label);
             }
         }
@@ -200,7 +205,7 @@ public class EducationState extends State {
     protected void handleInput() {
         countToggle();
         if (win()){
-            gsm.set(new EducationVictory(gsm,word));
+            gsm.push(new EducationVictory(gsm,word));
         }
     }
 

@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.brunomyrrha.game.GameResources.EducationVictory;
 import com.brunomyrrha.game.States.EducationState;
 import com.brunomyrrha.game.Resources.GameStateManager;
 import com.brunomyrrha.game.States.PlayState;
