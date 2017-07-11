@@ -21,20 +21,16 @@ import com.brunomyrrha.game.States.PlayState;
 
 public class DeFeriasGame extends ApplicationAdapter {
     public static GenerateFont font;
-    public static final int WIDTH = 480;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 360;
+    public static final int HEIGHT = 540;
     public static final String TITLE = "De Férias - O Jogo";
 
-    public static AssetManager assets;
-
     private GameStateManager gsm;
-    private Stage stage;
     private SpriteBatch sb;
 
     @Override
     public void create () {
         font = new GenerateFont();
-        stage = new Stage(new ScreenViewport());
         sb = new SpriteBatch();
         gsm = new GameStateManager();
         gsm.push(new CultureState(gsm));
@@ -45,7 +41,6 @@ public class DeFeriasGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //limpa tudo
         gsm.update(Gdx.graphics.getDeltaTime());
         gsm.render(sb);
-        stage.draw();
     }
 
     @Override
