@@ -28,12 +28,12 @@ public class CultureState extends State {
         super(gsm);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         cam.setToOrtho(false, Gdx.graphics.getWidth()*.5f,Gdx.graphics.getHeight()*.5f);
-        bird = new Bird(0,0);
+        bird = new Bird(0,Gdx.graphics.getHeight()*.25f);
         bg = new ImageLoader("flappyBg",1f);
         tree = new TreeObstacle(1);
         trees = new Array<TreeObstacle>();
         for (int i = 1; i <= TREE_COUNT; i++){
-            trees.add(new TreeObstacle(i * (TREE_SPACING + tree.WIDTH)));
+            trees.add(new TreeObstacle(i * (TREE_SPACING + tree.WIDTH + bird.getBounds().width)));
         }
     }
 
@@ -52,12 +52,13 @@ public class CultureState extends State {
         Gdx.app.log("CAM:",cam.position.x+"");
         for (TreeObstacle tree : trees){
             if ((cam.position.x - (cam.viewportWidth*.5f)) > (tree.getPosTreeTop().x + tree.getTreeTop().width())){
-                tree.reposition(tree.getPosTreeTop().x + ((tree.WIDTH + TREE_SPACING))*TREE_COUNT);
+                tree.reposition(tree.getPosTreeTop().x + ((tree.WIDTH + TREE_SPACING + bird.getBounds().width))*TREE_COUNT);
             }
 
-//            if (tree.collides(bird.getBounds())){
-//                gsm.set(new CultureState(gsm));
-//            }
+            if (tree.collides(bird.getBounds())){
+                gsm.set(new PlayState(gsm));
+                dispose();
+            }
         }
         cam.update();
     }
@@ -77,6 +78,5 @@ public class CultureState extends State {
 
     @Override
     public void dispose() {
-
     }
 }

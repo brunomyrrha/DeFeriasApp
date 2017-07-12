@@ -26,7 +26,7 @@ public class TreeObstacle {
 
     public TreeObstacle(float x){
         SCALE = Gdx.graphics.getWidth()*.01f;
-        TREE_GAP = Math.round(Bird.BIRD_HEIGHT*2f);
+        TREE_GAP = Math.round(Bird.BIRD_HEIGHT*2.5f);
         treeTop = new ImageLoader("treeTop",.5f);
         treeBottom = new ImageLoader("treeBottom",.5f);
         rand = new Random ();
@@ -34,8 +34,8 @@ public class TreeObstacle {
         posTreeTop = new Vector2(x, rand.nextInt(Math.round(FLUCTUATION*SCALE))+TREE_GAP+LOWEST_OPENING);
         posTreeBottom = new Vector2(x, posTreeTop.y - TREE_GAP - treeBottom.height());
 
-        boundsTop = new Rectangle(posTreeTop.x, posTreeTop.y, treeTop.getWidth()*.9f, treeTop.height()*.9f);
-        boundsBottom = new Rectangle(posTreeBottom.x,posTreeBottom.y,treeBottom.getWidth(),treeBottom.height());
+        boundsTop = new Rectangle(posTreeTop.x, posTreeTop.y, treeTop.width()*.9f, treeTop.height()*.9f);
+        boundsBottom = new Rectangle(posTreeBottom.x,posTreeBottom.y,treeBottom.width()*.9f,treeBottom.height());
         Gdx.app.log("Tree Top:",posTreeTop.y+"");
     }
 

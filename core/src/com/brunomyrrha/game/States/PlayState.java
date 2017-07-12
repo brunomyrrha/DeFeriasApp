@@ -21,7 +21,7 @@ public class PlayState extends State {
         super(gsm);
         //Enable debug for Logcat
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-
+        cam.update();
         //Enabling stagging and actors
         controller = new Controller();
         background = new ImageLoader("bg",1f);

@@ -33,7 +33,7 @@ public class DeFeriasGame extends ApplicationAdapter {
         font = new GenerateFont();
         sb = new SpriteBatch();
         gsm = new GameStateManager();
-        gsm.push(new CultureState(gsm));
+        gsm.push(new PlayState(gsm));
     }
 
     @Override

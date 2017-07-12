@@ -13,8 +13,8 @@ import com.brunomyrrha.game.Resources.ImageLoader;
 public class Bird {
     public static  float BIRD_HEIGHT;
     private static float SCALE;
-    private static final int GRAVITY = -20;
-    private int MOVEMENT = 80;
+    private static int GRAVITY = -15;
+    private int MOVEMENT = 100;
     private float timer = 0;
     private int i = 1;
 
@@ -36,8 +36,9 @@ public class Bird {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
         bird = new ImageLoader("arara",.5f);
-        playerBound = new Rectangle(x, y, bird.width()*.7f,bird.height()*.7f);
+        playerBound = new Rectangle(bird.width()-bird.width()*.4f, bird.height()-bird.height()*.4f, bird.width()-bird.width()*.6f,bird.height()-bird.height()*.4f);
         BIRD_HEIGHT = bird.height();
+        GRAVITY = Math.round(SCALE)*-20;
     }
 
     public void update(float deltatime){
@@ -59,15 +60,16 @@ public class Bird {
         if (position.y > (Gdx.graphics.getHeight()*.5f)-(bird.height())){
             position.y = (Gdx.graphics.getHeight()*.5f)-(bird.height());
         }
-        playerBound.setPosition(position.x,position.y);
+        playerBound.setPosition(position.x+(bird.width()*.3f),position.y+(bird.height()*.2f));
     }
 
     public void addSpeed(){
-        MOVEMENT = 80*i;
+        MOVEMENT = Math.round(SCALE)*100*i;
+
         i++;
     }
     public void jump(){
-        velocity.y = 200;
+        velocity.y = 175*(Math.round(SCALE));
         Gdx.app.log("SPEED:",MOVEMENT+"");
         Gdx.app.log("HEIGHT:",position.y+"");
 
