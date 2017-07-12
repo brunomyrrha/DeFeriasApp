@@ -15,7 +15,7 @@ import com.brunomyrrha.game.Resources.State;
  */
 
 public class CultureState extends State {
-    private static final int TREE_SPACING = 200;
+    private static final int TREE_SPACING = 300;
     private static final int TREE_COUNT = 4;
 
     private Bird bird;
@@ -27,7 +27,7 @@ public class CultureState extends State {
     public CultureState(GameStateManager gsm) {
         super(gsm);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        cam.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        cam.setToOrtho(false, Gdx.graphics.getWidth()*.5f,Gdx.graphics.getHeight()*.5f);
         bird = new Bird(0,0);
         bg = new ImageLoader("flappyBg",1f);
         tree = new TreeObstacle(1);
@@ -48,15 +48,16 @@ public class CultureState extends State {
     public void update(float deltaTime) {
         handleInput();
         bird.update(deltaTime);
-        cam.position.x = bird.getPosition().x + (Gdx.graphics.getWidth()*.0001f);
+        cam.position.x = bird.getPosition().x + (Gdx.graphics.getWidth()*.2f);
+        Gdx.app.log("CAM:",cam.position.x+"");
         for (TreeObstacle tree : trees){
             if ((cam.position.x - (cam.viewportWidth*.5f)) > (tree.getPosTreeTop().x + tree.getTreeTop().width())){
                 tree.reposition(tree.getPosTreeTop().x + ((tree.WIDTH + TREE_SPACING))*TREE_COUNT);
             }
 
-            if (tree.collides(bird.getBounds())){
-                gsm.set(new CultureState(gsm));
-            }
+//            if (tree.collides(bird.getBounds())){
+//                gsm.set(new CultureState(gsm));
+//            }
         }
         cam.update();
     }
