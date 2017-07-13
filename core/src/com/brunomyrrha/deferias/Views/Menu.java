@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.brunomyrrha.deferias.Controllers.Animated;
@@ -21,7 +22,9 @@ public class Menu extends State {
     private Table table;
     private Stage stage;
 
-    private Texture background,sesc;
+    private ImageButton culture,health,education,food;
+
+    private Texture background,sesc,btnCulture,btnHealth,btnEducation,btnFood;
     private Animated lion;
 
     public Menu(GameStateManager gsm){
@@ -31,13 +34,22 @@ public class Menu extends State {
         table = new Table();
         stage = new Stage();
 
+        //Image loads
+        background = new Texture(Gdx.files.internal("images/bg.png"));
+        sesc = new Texture(Gdx.files.internal("images/sesc.png"));
+        lion = new Animated("lion",.06f);
+        btnCulture = new Texture(Gdx.files.internal("images/btnCulture.png"));
+        btnHealth = new Texture(Gdx.files.internal("images/btnHealth.png"));
+        btnEducation = new Texture(Gdx.files.internal("images/btnEducation.png"));
+        btnFood = new Texture(Gdx.files.internal("images/btnFood.png"));
+
+
+        //Table loads
         table.add(title);
         table.setFillParent(true);
         table.top().pad(20);
         stage.addActor(table);
 
-        background = new Texture(Gdx.files.internal("images/bg.png"));
-        lion = new Animated("lion",.06f);
     }
 
 
@@ -57,7 +69,8 @@ public class Menu extends State {
         sb.begin();
         sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),50,20);
+        sb.draw(lion.textureRegion(),60,20);
+        sb.draw(sesc,0,0);
         sb.end();
         stage.draw();
     }
