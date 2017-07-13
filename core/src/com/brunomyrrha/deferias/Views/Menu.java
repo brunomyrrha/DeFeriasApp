@@ -21,12 +21,12 @@ public class Menu extends State {
     private Table table;
     private Stage stage;
 
-    private Texture background;
+    private Texture background,sesc;
     private Animated lion;
 
     public Menu(GameStateManager gsm){
         super(gsm);
-        cam.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        cam.setToOrtho(false,360,540);
         title = DeFerias.FONT.getLabel("De Férias");
         table = new Table();
         stage = new Stage();
@@ -55,9 +55,9 @@ public class Menu extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),((Gdx.graphics.getWidth()/2)-lion.textureRegion().getRegionWidth()/2),0);
+        sb.draw(lion.textureRegion(),50,20);
         sb.end();
         stage.draw();
     }
