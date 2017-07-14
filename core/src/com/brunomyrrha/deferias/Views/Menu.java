@@ -28,11 +28,12 @@ public class Menu extends State {
     private Viewport viewport;
 
     private Image btnCulture,btnHealth,btnEducation,btnFood;
+    private boolean culture, health, education, food;
 
     private Texture background,sesc;
     private Animated lion;
 
-    public Menu(final GameStateManager gsm){
+    public Menu(GameStateManager gsm){
         super(gsm);
         cam.setToOrtho(false,WIDTH,HEIGHT);
         viewport = new FitViewport(WIDTH,HEIGHT);
@@ -53,11 +54,13 @@ public class Menu extends State {
         btnCulture.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                culture = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                culture = false;
                 System.out.println("Culture State");
             }
         });
@@ -65,11 +68,13 @@ public class Menu extends State {
         btnHealth.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                health = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                health = false;
                 System.out.println("Health State");
             }
         });
@@ -77,11 +82,13 @@ public class Menu extends State {
         btnFood.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                food = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                food = false;
                 System.out.println("Food State");
             }
         });
@@ -89,14 +96,14 @@ public class Menu extends State {
         btnEducation.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                education = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Education State");
-                gsm.set(new Education(gsm));
-                dispose();
+                education = false;
             }
         });
 
@@ -115,7 +122,18 @@ public class Menu extends State {
 
     @Override
     protected void handleInput() {
+        if (education){
+            gsm.push(new Education(gsm));
+        }
+        if (food){
 
+        }
+        if (culture){
+
+        }
+        if (health){
+
+        }
     }
 
     @Override
