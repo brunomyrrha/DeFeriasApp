@@ -82,6 +82,7 @@ public class Education extends State {
         for (int i = 0; i < word.length(); i++){
             wordMatrix.add(word.charAt(i));
             textButton = new TextButton(word.charAt(i)+"",skin, "toggle");
+            textButton.getLabel().setFontScale(1.5f);
             textButton.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -104,6 +105,7 @@ public class Education extends State {
             }
             wordMatrix.add(c);
             textButton = new TextButton(c+"",skin,"default");
+            textButton.getLabel().setFontScale(1.5f);
             textButton.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -163,7 +165,7 @@ public class Education extends State {
     @Override
     protected void handleInput() {
         if (win()){
-            gsm.set(new victory(gsm,word));
+            gsm.set(new Victory(gsm,word));
             dispose();
         }
     }
