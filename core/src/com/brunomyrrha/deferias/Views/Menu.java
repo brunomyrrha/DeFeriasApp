@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -24,7 +23,6 @@ public class Menu extends State {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 1280;
 
-    private Label title;
     private Table table;
     private Stage stage;
     private Viewport viewport;
@@ -96,8 +94,9 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.set(new Education(gsm));
                 System.out.println("Education State");
+                gsm.set(new Education(gsm));
+                dispose();
             }
         });
 
@@ -138,6 +137,9 @@ public class Menu extends State {
 
     @Override
     public void dispose() {
+        lion.dispose();
+        background.dispose();
+        sesc.dispose();
         stage.dispose();
     }
 }
