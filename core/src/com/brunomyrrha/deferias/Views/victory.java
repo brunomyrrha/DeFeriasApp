@@ -18,7 +18,7 @@ import javax.swing.text.View;
  * Created by brunomyrrha on 14/07/2017.
  */
 
-public class victory extends State {
+public class Victory extends State {
     private Texture victory, tipTableTexture,background,btnOk;
     private Stage stage;
     private Label label;
@@ -26,10 +26,10 @@ public class victory extends State {
     private Viewport viewport;
 
 
-    public victory(GameStateManager gsm, String word){
+    public Victory(GameStateManager gsm, String word){
         super(gsm);
         tipTableTexture = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
-        victory = new Texture(Gdx.files.internal("images/victory.png"));
+        victory = new Texture(Gdx.files.internal("images/Victory.png"));
         background = new Texture(Gdx.files.internal("images/bgSesc.png"));
         btnOk = new Texture (Gdx.files.internal("images/btnOk.png"));
 
