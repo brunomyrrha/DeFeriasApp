@@ -61,7 +61,7 @@ public class Education extends State {
         matrix = new Array<TextButton>();
         wordSelector = new WordSelector();
         word = wordSelector.chooseWord();
-        label = DeFerias.FONT.getLabel("Letras: " +word.length()+"");
+        label = DeFerias.FONT.getLabel(word.length()+" letras");
         skin = new Skin(Gdx.files.internal("images/stoneButton.json"));
         tipTable.add(label);
         tipTable.top().pad(90);
@@ -69,6 +69,7 @@ public class Education extends State {
         //Stage loaders
         generateMatrix(word);
         addTable();
+        table.padTop(150);
         stage.addActor(table);
         stage.addActor(tipTable);
         System.out.println(word);
@@ -98,7 +99,7 @@ public class Education extends State {
         }
 
         //Add Incorrect Buttons
-        for (int i = word.length(); i < 9; i++){
+        for (int i = word.length(); i < 12; i++){
             Character c = base.charAt(rand.nextInt(base.length()-1));
             while (wordMatrix.contains(c,true)){
                 c = base.charAt(rand.nextInt(base.length()-1));

@@ -59,6 +59,7 @@ public class Menu extends State {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Culture State");
+                gsm.set(new Culture(gsm));
             }
         });
 
