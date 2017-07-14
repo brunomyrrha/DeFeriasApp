@@ -29,7 +29,7 @@ public class Menu extends State {
 
     public Menu(GameStateManager gsm){
         super(gsm);
-        cam.setToOrtho(false,360,540);
+        cam.setToOrtho(false,800,1280);
         title = DeFerias.FONT.getLabel("De Férias");
         table = new Table();
         stage = new Stage();
@@ -69,7 +69,7 @@ public class Menu extends State {
         sb.begin();
         sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),60,20);
+        sb.draw(lion.textureRegion(),150,80);
         sb.draw(sesc,0,0);
         sb.end();
         stage.draw();
