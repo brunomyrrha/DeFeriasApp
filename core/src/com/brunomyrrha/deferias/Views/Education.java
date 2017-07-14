@@ -31,6 +31,7 @@ public class Education extends State {
     private WordSelector wordSelector;
     private String word;
     private Array<Character> wordMatrix;
+
     //TextButton loader
     private TextButton textButton;
     private Array<TextButton> matrix;
@@ -135,7 +136,7 @@ public class Education extends State {
     }
 
     private void reset() {
-        Gdx.input.vibrate(500);
+        Gdx.input.vibrate(300);
         for (TextButton tb : matrix){
             if (tb.isChecked()){
                 tb.toggle();
@@ -164,7 +165,7 @@ public class Education extends State {
     @Override
     protected void handleInput() {
         if (win()){
-            gsm.pop();
+            gsm.set(new victoryEducation(gsm,word));
             dispose();
         }
     }
@@ -186,6 +187,7 @@ public class Education extends State {
     @Override
     public void dispose() {
         stage.dispose();
+        tipTableTexture.dispose();
         background.dispose();
     }
 }
