@@ -29,7 +29,7 @@ public class Victory extends State {
     public Victory(GameStateManager gsm, String word){
         super(gsm);
         tipTableTexture = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
-        victory = new Texture(Gdx.files.internal("images/Victory.png"));
+        victory = new Texture(Gdx.files.internal("images/victory.png"));
         background = new Texture(Gdx.files.internal("images/bgSesc.png"));
         btnOk = new Texture (Gdx.files.internal("images/btnOk.png"));
 
