@@ -18,18 +18,21 @@ import javax.swing.text.View;
  * Created by brunomyrrha on 14/07/2017.
  */
 
-public class victoryEducation extends State {
-    private Texture victory, tipTableTexture,bg;
+public class victory extends State {
+    private Texture victory, tipTableTexture,background,btnOk;
     private Stage stage;
     private Label label;
     private Table table;
     private Viewport viewport;
 
 
-    public victoryEducation(GameStateManager gsm, String word){
+    public victory(GameStateManager gsm, String word){
         super(gsm);
         tipTableTexture = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
         victory = new Texture(Gdx.files.internal("images/victory.png"));
+        background = new Texture(Gdx.files.internal("images/bgSesc.png"));
+        btnOk = new Texture (Gdx.files.internal("images/btnOk.png"));
+
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage(viewport);
         label = DeFerias.FONT.getLabel(word);
@@ -54,11 +57,14 @@ public class victoryEducation extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-        stage.draw();
         sb.begin();
-        sb.draw(tipTableTexture,0,0);
-        sb.draw(victory,0,0);
+        sb.draw(background,0,0);
+        sb.draw(tipTableTexture,Menu.WIDTH/2-tipTableTexture.getWidth()/2,Menu.HEIGHT/2-90);
+        sb.draw(victory,(Menu.WIDTH/2)-(victory.getWidth()/2),Menu.HEIGHT-victory.getHeight()-20);
+        sb.draw(btnOk,Menu.WIDTH/2-btnOk.getWidth()/2,230);
         sb.end();
+        stage.draw();
+
     }
 
     @Override

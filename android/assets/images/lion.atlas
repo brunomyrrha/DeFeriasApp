@@ -10,112 +10,112 @@ lion
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 13
+  index: 1
 lion
   rotate: false
   xy: 2, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 14
+  index: 20
 lion
   rotate: false
   xy: 504, 1508
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 15
+  index: 21
 lion
   rotate: false
   xy: 2, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 16
+  index: 22
 lion
   rotate: false
   xy: 504, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 17
+  index: 23
 lion
   rotate: false
   xy: 1006, 1508
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 18
+  index: 24
 lion
   rotate: false
   xy: 2, 2
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 19
+  index: 3
 lion
   rotate: false
   xy: 504, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 24
+  index: 4
 lion
   rotate: false
   xy: 1006, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 23
+  index: 5
 lion
   rotate: false
   xy: 1508, 1508
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 20
+  index: 6
 lion
   rotate: false
   xy: 504, 2
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 21
+  index: 7
 lion
   rotate: false
   xy: 1006, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 0
+  index: 2
 lion
   rotate: false
   xy: 1508, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 1
+  index: 9
 lion
   rotate: false
   xy: 1006, 2
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 2
+  index: 0
 lion
   rotate: false
   xy: 1508, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 3
+  index: 8
 lion
   rotate: false
   xy: 1508, 2
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 4
+  index: 10
 
 lion2.png
 size: 2048,2048
@@ -128,60 +128,60 @@ lion
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 5
+  index: 11
 lion
   rotate: false
   xy: 2, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 6
+  index: 12
 lion
   rotate: false
   xy: 504, 1508
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 7
+  index: 13
 lion
   rotate: false
   xy: 2, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 8
+  index: 14
 lion
   rotate: false
   xy: 504, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 9
+  index: 15
 lion
   rotate: false
   xy: 1006, 1508
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 22
+  index: 16
 lion
   rotate: false
   xy: 2, 2
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 10
+  index: 17
 lion
   rotate: false
   xy: 504, 504
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 11
+  index: 18
 lion
   rotate: false
   xy: 1006, 1006
   size: 500, 500
   orig: 500, 500
   offset: 0, 0
-  index: 12
+  index: 19

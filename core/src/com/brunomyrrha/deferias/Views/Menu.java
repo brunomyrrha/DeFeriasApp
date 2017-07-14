@@ -127,7 +127,7 @@ public class Menu extends State {
         sb.begin();
         sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),150,60);
+        sb.draw(lion.textureRegion(),150,40);
         sb.draw(sesc,0,0);
         sb.end();
         stage.draw();
