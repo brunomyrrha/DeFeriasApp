@@ -180,7 +180,7 @@ public class Education extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background,0,0);
-        sb.draw(tipTableTexture,(Menu.WIDTH/2)-(tipTableTexture.getWidth()/2),Menu.HEIGHT-tipTableTexture.getHeight());
+        sb.draw(tipTableTexture,(Menu.WIDTH/2)-(tipTableTexture.getWidth()/2),Menu.HEIGHT-tipTableTexture.getHeight()+10);
         sb.end();
         stage.draw();
     }
