@@ -1,6 +1,7 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
+import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.State;
 import com.brunomyrrha.deferias.Controllers.WordSelector;
 import com.brunomyrrha.deferias.DeFerias;
@@ -41,8 +43,8 @@ public class Education extends State {
     private Table table, tipTable;
     private Viewport viewport;
 
-    public Education(final GameStateManager gsm){
-        super(gsm);
+    public Education(final GameStateManager gsm, LoadManager lm){
+        super(gsm,lm);
         //Stage, camera, settings
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage(viewport);
@@ -53,8 +55,8 @@ public class Education extends State {
         Gdx.input.setInputProcessor(stage);
 
         //Image loader
-        background = new Texture(Gdx.files.internal("images/bgSesc.png"));
-        tipTableTexture = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
+        background = lm.getTexture("bgSesc.png");
+        tipTableTexture = lm.getTexture("tipTableTexture.png");
 
         //Word loader, chooser, constructor
         wordMatrix = new Array<Character>();
@@ -62,7 +64,7 @@ public class Education extends State {
         wordSelector = new WordSelector();
         word = wordSelector.chooseWord();
         label = DeFerias.FONT.getLabel(word.length()+" letras");
-        skin = new Skin(Gdx.files.internal("images/stoneButton.json"));
+        skin = lm.getSkin("stoneButton.json");
         tipTable.add(label);
         tipTable.top().pad(90);
 
@@ -166,7 +168,7 @@ public class Education extends State {
     @Override
     protected void handleInput() {
         if (win()){
-            gsm.set(new Victory(gsm,word));
+            gsm.set(new Victory(gsm,word,lm));
             dispose();
         }
     }

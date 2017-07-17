@@ -1,6 +1,7 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.deferias.Controllers.Animated;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
+import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.State;
 
 /**
@@ -27,13 +29,13 @@ public class Menu extends State {
     private Stage stage;
     private Viewport viewport;
 
-    private Image btnCulture,btnHealth,btnEducation,btnFood;
+    private Image btnCulture,btnEducation;
 
     private Texture background,sesc;
     private Animated lion;
 
-    public Menu(final GameStateManager gsm){
-        super(gsm);
+    public Menu(final GameStateManager gsm, final LoadManager lm){
+        super(gsm,lm);
         cam.setToOrtho(false,WIDTH,HEIGHT);
         viewport = new FitViewport(WIDTH,HEIGHT);
         table = new Table();
@@ -41,13 +43,11 @@ public class Menu extends State {
         Gdx.input.setInputProcessor(stage);
 
         //Image loads
-        background = new Texture(Gdx.files.internal("images/bg.png"));
-        sesc = new Texture(Gdx.files.internal("images/sesc.png"));
-        lion = new Animated("lion",.06f);
-        btnCulture = new Image (new Texture(Gdx.files.internal("images/btnCulture.png")));
-       // btnHealth = new Image (new Texture(Gdx.files.internal("images/btnHealth.png")));
-        btnEducation = new Image(new Texture(Gdx.files.internal("images/btnEducation.png")));
-       // btnFood = new Image(new Texture(Gdx.files.internal("images/btnFood.png")));
+        background = lm.getTexture("bg.png");
+        sesc = lm.getTexture("sesc.png");
+        lion = new Animated("lion",.06f,lm);
+        btnCulture = new Image (lm.getTexture("btnCulture.png"));
+        btnEducation = new Image(lm.getTexture("btnEducation.png"));
 
         //Listerners
         btnCulture.addListener(new InputListener(){
@@ -59,33 +59,9 @@ public class Menu extends State {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Culture State");
-                gsm.set(new Culture(gsm));
+                gsm.set(new Culture(gsm,lm));
             }
         });
-
-//        btnHealth.addListener(new InputListener(){
-//            @Override
-//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                return true;
-//            }
-//
-//            @Override
-//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//                System.out.println("Health State");
-//            }
-//        });
-
-//        btnFood.addListener(new InputListener(){
-//            @Override
-//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                return true;
-//            }
-//
-//            @Override
-//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//                System.out.println("Food State");
-//            }
-//        });
 
         btnEducation.addListener(new InputListener(){
             @Override
@@ -96,18 +72,16 @@ public class Menu extends State {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Education State");
-                gsm.set(new Education(gsm));
+                gsm.set(new Education(gsm,lm));
             }
         });
 
         //Table Adds
         table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
         table.add(btnEducation).size(btnEducation.getWidth(),btnEducation.getHeight()).pad(10);
-//        table.row();
-//        table.add(btnFood).size(btnFood.getWidth(),btnFood.getHeight()).pad(10);
-//        table.add(btnHealth).size(btnHealth.getWidth(),btnFood.getHeight()).pad(10);
         table.setFillParent(true);
         table.top().pad(360);
+
         //Table loads
         stage.addActor(table);
     }

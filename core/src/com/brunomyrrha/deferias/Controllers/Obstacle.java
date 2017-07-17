@@ -22,9 +22,9 @@ public class Obstacle {
     private Vector2 positionTop, positionBot;
     private Random rand;
 
-    public Obstacle (float x){
-        treeTop = new Texture(Gdx.files.internal("images/treeTop.png"));
-        treeBot = new Texture(Gdx.files.internal("images/treeBot.png"));
+    public Obstacle (float x, LoadManager lm){
+        treeTop = lm.getTexture("treeTop.png");
+        treeBot = lm.getTexture("treeBot.png");
         rand = new Random();
         positionTop = new Vector2(x, rand.nextInt(VARIATION)+GAP+LOWEST);
         positionBot = new Vector2(x, positionTop.y - GAP - treeTop.getHeight());
@@ -59,9 +59,5 @@ public class Obstacle {
 
     public Boolean collides (Rectangle player) {
         return player.overlaps(hitBoxBot) || player.overlaps(hitBoxTop);
-    }
-
-    public Boolean collect (Rectangle player){
-        return player.overlaps(points);
     }
 }

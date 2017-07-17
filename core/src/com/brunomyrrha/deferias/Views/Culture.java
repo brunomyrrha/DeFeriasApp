@@ -2,6 +2,7 @@ package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.deferias.Controllers.Bird;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
+import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.Obstacle;
 import com.brunomyrrha.deferias.Controllers.State;
 import com.brunomyrrha.deferias.DeFerias;
@@ -37,25 +39,29 @@ public class Culture extends State {
     private Array<Obstacle> trees;
     private float seconds = 0;
 
-    public Culture(GameStateManager gsm) {
-        super(gsm);
+    public Culture(GameStateManager gsm, LoadManager lm) {
+        super(gsm, lm);
         camera = new OrthographicCamera();
         camera.setToOrtho(false,Menu.WIDTH,Menu.HEIGHT);
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage(viewport);
         table = new Table();
-        scoreTable = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
+
+        //Image Loads
+        scoreTable = lm.getTexture("tipTableTexture.png");
+        background = lm.getTexture("bg.png");
+        sesc = lm.getTexture("bgParrot.png");
+
         table.setPosition(Menu.WIDTH/2-50,Menu.HEIGHT-195);
-        bird = new Bird();
-        tree = new Obstacle(1);
+        bird = new Bird(lm);
+        tree = new Obstacle(1,lm);
         trees = new Array<Obstacle>();
+
         for (int i = 1; i <= TREE_COUNT; i++){
-            trees.add(new Obstacle(i*(TREE_SPACING + tree.getTextureTop().getWidth())));
+            trees.add(new Obstacle(i*(TREE_SPACING + tree.getTextureTop().getWidth()),lm));
         }
-        background = new Texture(Gdx.files.internal("images/bg.png"));
-        sesc = new Texture(Gdx.files.internal("images/bgParrot.png"));
+
         stage.addActor(table);
-        Gdx.input.setCatchBackKey(true);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -79,7 +85,7 @@ public class Culture extends State {
             }
             if (obstacle.collides(bird.getHitBox())){
                 Gdx.input.vibrate(300);
-                gsm.set(new Victory(gsm,Math.round(seconds)+" segundos"));
+                gsm.set(new Victory(gsm,Math.round(seconds)+" segundos",lm));
             }
         }
         seconds += Gdx.graphics.getRawDeltaTime();
@@ -114,7 +120,5 @@ public class Culture extends State {
             obstacle.getTextureBot().dispose();
         }
         stage.dispose();
-
     }
-
 }

@@ -18,9 +18,9 @@ public class Animated extends ApplicationAdapter{
     private TextureAtlas textureAtlas;
     private Animation animation;
 
-    public Animated(String filename, float FRAME_DURATION){
+    public Animated(String filename, float FRAME_DURATION, LoadManager lm){
         textureRegion = new TextureRegion();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("images/"+filename+".atlas"));
+        textureAtlas = lm.getTextureAtlas(filename+".atlas");
         Array<TextureAtlas.AtlasRegion> arrayAtlas = textureAtlas.findRegions(filename);
         animation = new Animation<TextureRegion>(FRAME_DURATION,arrayAtlas, Animation.PlayMode.LOOP);
     }

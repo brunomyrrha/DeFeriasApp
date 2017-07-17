@@ -1,5 +1,6 @@
 package com.brunomyrrha.deferias.Controllers;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -13,9 +14,11 @@ public abstract class State {
     protected OrthographicCamera cam;
     protected Vector3 mouse;
     protected GameStateManager gsm;
+    protected LoadManager lm;
 
-    protected State(GameStateManager gsm){
+    protected State(GameStateManager gsm, LoadManager lm){
         this.gsm = gsm;
+        this.lm = lm;
         cam = new OrthographicCamera();
         mouse = new Vector3();
 

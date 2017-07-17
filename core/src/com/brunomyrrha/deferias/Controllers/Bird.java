@@ -12,7 +12,7 @@ import com.brunomyrrha.deferias.Views.Menu;
 
 public class Bird {
     private static int GRAVITY = -25;
-    public  int movement = 550; //CORRECT = 150
+    public  int movement = 150; //CORRECT = 150
     private int speed;
     float time;
     private Texture bird;
@@ -20,8 +20,8 @@ public class Bird {
     private Rectangle hitBox;
 
 
-    public Bird (){
-        bird = new Texture(Gdx.files.internal("images/parrot.png"));
+    public Bird (LoadManager lm){
+        bird = lm.getTexture("parrot.png");
         position = new Vector2(0,Menu.HEIGHT/2);
         velocity = new Vector2(0,0);
         speed = 1;

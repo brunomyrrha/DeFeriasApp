@@ -1,6 +1,7 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
+import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.State;
 import com.brunomyrrha.deferias.DeFerias;
 
@@ -26,14 +28,16 @@ public class Victory extends State {
     private Viewport viewport;
 
 
-    public Victory(GameStateManager gsm, String word){
-        super(gsm);
+    public Victory(GameStateManager gsm, String word, LoadManager lm){
+        super(gsm,lm);
         cam.setToOrtho(false,Menu.WIDTH,Menu.HEIGHT);
-        tipTableTexture = new Texture(Gdx.files.internal("images/tipTableTexture.png"));
-        victory = new Texture(Gdx.files.internal("images/victory.png"));
-        background = new Texture(Gdx.files.internal("images/bgSesc.png"));
-        btnOk = new Texture (Gdx.files.internal("images/btnOk.png"));
+        //Asset Loader
+        tipTableTexture = lm.getTexture("tipTableTexture.png");
+        victory = lm.getTexture("victory.png");
+        background = lm.getTexture("bgSesc.png");
+        btnOk = lm.getTexture("btnOk.png");
 
+        //Camera and Staging
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage(viewport);
         label = DeFerias.FONT.getLabel(word);
@@ -46,8 +50,7 @@ public class Victory extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()){
-            gsm.set(new Menu(gsm));
-            System.out.println(gsm.getStackSize());
+            gsm.set(new Menu(gsm,lm));
         }
 
     }
