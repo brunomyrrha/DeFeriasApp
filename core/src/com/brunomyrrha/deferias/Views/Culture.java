@@ -108,6 +108,11 @@ public class Culture extends State {
         background.dispose();
         bird.getTexture().dispose();
         stage.dispose();
-        trees.clear();
+        for (Obstacle obstacle : trees){
+            obstacle.getTextureBot().dispose();
+            obstacle.getTextureTop().dispose();
+        }
+        scoreTable.dispose();
+        sesc.dispose();
     }
 }
