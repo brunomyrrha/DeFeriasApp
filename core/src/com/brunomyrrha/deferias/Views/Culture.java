@@ -100,12 +100,12 @@ public class Culture extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background,camera.position.x-400,0);
-        sb.draw(bird.getTexture(),bird.getPosition().x,bird.getPosition().y);
         for(Obstacle obstacle : trees){
             sb.draw(obstacle.getTextureTop(),obstacle.getPositionTop().x,obstacle.getPositionTop().y);
             sb.draw(obstacle.getTextureBot(),obstacle.getPositionBot().x,obstacle.getPositionBot().y);
         }
         sb.draw(scoreTable,camera.position.x-scoreTable.getWidth()/2,Menu.HEIGHT-scoreTable.getHeight()+10);
+        sb.draw(bird.getTexture(),bird.getPosition().x,bird.getPosition().y);
         sb.draw(sesc,camera.position.x-400,0);
         sb.end();
         stage.draw();
@@ -113,12 +113,6 @@ public class Culture extends State {
 
     @Override
     public void dispose() {
-        background.dispose();
-        bird.getTexture().dispose();
-        for (Obstacle obstacle : trees){
-            obstacle.getTextureTop().dispose();
-            obstacle.getTextureBot().dispose();
-        }
         stage.dispose();
     }
 }

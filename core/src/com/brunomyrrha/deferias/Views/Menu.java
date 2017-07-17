@@ -1,7 +1,6 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -110,9 +109,6 @@ public class Menu extends State {
 
     @Override
     public void dispose() {
-        lion.dispose();
-        background.dispose();
-        sesc.dispose();
         stage.dispose();
     }
 }

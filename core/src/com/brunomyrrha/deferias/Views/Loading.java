@@ -14,7 +14,6 @@ import static com.brunomyrrha.deferias.Views.Menu.WIDTH;
  */
 
 public class Loading extends State {
-    private boolean loaded = false;
     private Texture loadBG;
     public Loading(GameStateManager gsm, LoadManager lm) {
         super(gsm,lm);
@@ -30,8 +29,7 @@ public class Loading extends State {
     @Override
     public void update(float deltaTime) {
         if (lm.loading()){
-            loaded = true;
-            System.out.println("Complete");
+            gsm.set(new Menu(gsm,lm));
         }
     }
 
@@ -45,6 +43,5 @@ public class Loading extends State {
 
     @Override
     public void dispose() {
-        loadBG.dispose();
     }
 }

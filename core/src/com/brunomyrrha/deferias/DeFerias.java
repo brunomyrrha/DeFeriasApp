@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.brunomyrrha.deferias.Controllers.Font;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
 import com.brunomyrrha.deferias.Controllers.LoadManager;
-import com.brunomyrrha.deferias.Views.Culture;
-import com.brunomyrrha.deferias.Views.Education;
 import com.brunomyrrha.deferias.Views.Loading;
-import com.brunomyrrha.deferias.Views.Menu;
 
 public class DeFerias extends ApplicationAdapter {
 	public static Font FONT;

@@ -1,8 +1,6 @@
 package com.brunomyrrha.deferias.Controllers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -13,7 +11,7 @@ import java.util.Random;
  */
 
 public class Obstacle {
-    private static int VARIATION = 700;
+    private static int VARIATION = 500;
     private static int GAP = 300;
     private static int LOWEST = 150;
     private static Texture treeTop, treeBot;
