@@ -47,6 +47,7 @@ public class Victory extends State {
     protected void handleInput() {
         if (Gdx.input.justTouched()){
             gsm.set(new Menu(gsm));
+            System.out.println(gsm.getStackSize());
         }
 
     }
