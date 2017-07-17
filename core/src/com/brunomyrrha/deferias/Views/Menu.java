@@ -15,6 +15,8 @@ import com.brunomyrrha.deferias.Controllers.GameStateManager;
 import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.State;
 
+import java.awt.event.KeyEvent;
+
 /**
  * Created by brunomyrrha on 12/07/17.
  */
@@ -27,8 +29,9 @@ public class Menu extends State {
     private Table table;
     private Stage stage;
     private Viewport viewport;
+    private KeyEvent event;
 
-    private Image btnCulture,btnEducation;
+    private Image btnCulture,btnEducation, btnLeaderboard;
 
     private Texture background,sesc;
     private Animated lion;
@@ -45,10 +48,23 @@ public class Menu extends State {
         background = lm.getTexture("bg.png");
         sesc = lm.getTexture("sesc.png");
         lion = new Animated("lion",.06f,lm);
+        btnLeaderboard = new Image(lm.getTexture("btnLeaderboard.png"));
         btnCulture = new Image (lm.getTexture("btnCulture.png"));
         btnEducation = new Image(lm.getTexture("btnEducation.png"));
 
         //Listerners
+        btnLeaderboard.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Leader");
+            }
+        });
+
         btnCulture.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -78,8 +94,9 @@ public class Menu extends State {
         //Table Adds
         table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
         table.add(btnEducation).size(btnEducation.getWidth(),btnEducation.getHeight()).pad(10);
+        table.add(btnLeaderboard).size(btnLeaderboard.getWidth(), btnLeaderboard.getHeight()).pad(10);
         table.setFillParent(true);
-        table.top().pad(360);
+        table.top().pad(460);
 
         //Table loads
         stage.addActor(table);
@@ -88,6 +105,7 @@ public class Menu extends State {
 
     @Override
     protected void handleInput() {
+
     }
 
     @Override

@@ -28,6 +28,7 @@ public class LoadManager {
         assetManager.load("images/treeBot.png", Texture.class);
         assetManager.load("images/treeTop.png", Texture.class);
         assetManager.load("images/victory.png", Texture.class);
+        assetManager.load("images/btnLeaderboard.png", Texture.class);
 
         //Load Texture Atlas
         assetManager.load("images/lion.atlas", TextureAtlas.class);

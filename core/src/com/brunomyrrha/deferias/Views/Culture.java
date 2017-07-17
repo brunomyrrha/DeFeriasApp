@@ -26,7 +26,8 @@ import com.brunomyrrha.deferias.DeFerias;
 
 public class Culture extends State {
     private static final int TREE_COUNT = 2;
-    private static final int TREE_SPACING = 350;
+    private int TREE_SPACING = 250;
+    private float time;
 
     private Bird bird;
     private Texture background, scoreTable, sesc;
@@ -44,6 +45,10 @@ public class Culture extends State {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,Menu.WIDTH,Menu.HEIGHT);
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
+        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchMenuKey(true);
+
+
         stage = new Stage(viewport);
         table = new Table();
 
@@ -58,18 +63,22 @@ public class Culture extends State {
         trees = new Array<Obstacle>();
 
         for (int i = 1; i <= TREE_COUNT; i++){
-            trees.add(new Obstacle(i*(TREE_SPACING + tree.getTextureTop().getWidth()),lm));
+            trees.add(new Obstacle(i*(TREE_SPACING + tree.getTextureTop().getWidth()+150),lm));
         }
 
         stage.addActor(table);
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.isTouched()){
+        if (Gdx.input.isTouched()) {
             bird.jump();
         }
+        time+=Gdx.graphics.getRawDeltaTime();
+        if (Math.round(time) % 10 == 0){
+            TREE_SPACING++;
+        }
+
     }
 
     @Override
@@ -103,6 +112,7 @@ public class Culture extends State {
         for(Obstacle obstacle : trees){
             sb.draw(obstacle.getTextureTop(),obstacle.getPositionTop().x,obstacle.getPositionTop().y);
             sb.draw(obstacle.getTextureBot(),obstacle.getPositionBot().x,obstacle.getPositionBot().y);
+//            System.out.println(obstacle.getPositionTop());
         }
         sb.draw(scoreTable,camera.position.x-scoreTable.getWidth()/2,Menu.HEIGHT-scoreTable.getHeight()+10);
         sb.draw(bird.getTexture(),bird.getPosition().x,bird.getPosition().y);

@@ -14,7 +14,7 @@ public class Bird {
     private static int GRAVITY = -25;
     public  int movement = 150; //CORRECT = 150
     private int speed;
-    float time;
+    private float time;
     private Texture bird;
     private Vector2 position, velocity;
     private Rectangle hitBox;

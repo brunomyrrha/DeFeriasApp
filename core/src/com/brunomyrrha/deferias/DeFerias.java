@@ -8,6 +8,7 @@ import com.brunomyrrha.deferias.Controllers.Font;
 import com.brunomyrrha.deferias.Controllers.GameStateManager;
 import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Views.Loading;
+import com.brunomyrrha.deferias.Views.Menu;
 
 public class DeFerias extends ApplicationAdapter {
 	public static Font FONT;
@@ -26,6 +27,11 @@ public class DeFerias extends ApplicationAdapter {
 		gsm = new GameStateManager();
 		sb = new SpriteBatch();
 		gsm.push(new Loading(gsm,loadManager));
+	}
+
+	@Override
+	public void resume(){
+		gsm.set(new Loading(gsm,loadManager));
 	}
 
 	@Override

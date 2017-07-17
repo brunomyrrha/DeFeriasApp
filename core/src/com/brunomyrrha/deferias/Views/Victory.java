@@ -3,7 +3,10 @@ package com.brunomyrrha.deferias.Views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -20,37 +23,56 @@ import javax.swing.text.View;
  */
 
 public class Victory extends State {
-    private Texture victory, tipTableTexture,background,btnOk;
+    private Texture victory, tipTableTexture,background;
     private Stage stage;
     private Label label;
-    private Table table;
+    private Table table, okTable;
     private Viewport viewport;
+    private Image button;
 
-
-    public Victory(GameStateManager gsm, String word, LoadManager lm){
+    public Victory(final GameStateManager gsm, String word, final LoadManager lm){
         super(gsm,lm);
         cam.setToOrtho(false,Menu.WIDTH,Menu.HEIGHT);
+        viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
+        stage = new Stage(viewport);
+        Gdx.input.setInputProcessor(stage);
+
         //Asset Loader
         tipTableTexture = lm.getTexture("tipTableTexture.png");
         victory = lm.getTexture("victory.png");
         background = lm.getTexture("bgSesc.png");
-        btnOk = lm.getTexture("btnOk.png");
+        button = new Image(lm.getTexture("btnOk.png"));
+        button.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Ok");
+                gsm.set(new Menu(gsm,lm));
+            }
+        });
+
 
         //Camera and Staging
-        viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
-        stage = new Stage(viewport);
         label = DeFerias.FONT.getLabel(word);
         table = new Table();
+        okTable = new Table();
+        okTable.add(button);
+        okTable.setFillParent(true);
+        okTable.bottom().padBottom(250);
+
         table.add(label);
         table.setFillParent(true);
         stage.addActor(table);
+        stage.addActor(okTable);
+
     }
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.justTouched()){
-            gsm.set(new Menu(gsm,lm));
-        }
 
     }
 
@@ -66,7 +88,6 @@ public class Victory extends State {
         sb.draw(background,0,0);
         sb.draw(tipTableTexture,Menu.WIDTH/2-tipTableTexture.getWidth()/2,Menu.HEIGHT/2-100);
         sb.draw(victory,(Menu.WIDTH/2)-(victory.getWidth()/2),Menu.HEIGHT-victory.getHeight()-20);
-        sb.draw(btnOk,Menu.WIDTH/2-btnOk.getWidth()/2,230);
         sb.end();
         stage.draw();
 
