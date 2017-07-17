@@ -12,7 +12,7 @@ import com.brunomyrrha.deferias.Views.Menu;
 
 public class Bird {
     private static int GRAVITY = -25;
-    public  int movement = 150; //CORRECT = 150 //TEST = 1500
+    public  int movement = 550; //CORRECT = 150
     private int speed;
     float time;
     private Texture bird;

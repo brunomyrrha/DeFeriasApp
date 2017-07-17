@@ -1,6 +1,7 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,7 +23,7 @@ import com.brunomyrrha.deferias.DeFerias;
  */
 
 public class Culture extends State {
-    private static final int TREE_COUNT = 4;
+    private static final int TREE_COUNT = 2;
     private static final int TREE_SPACING = 350;
 
     private Bird bird;
@@ -54,6 +55,7 @@ public class Culture extends State {
         background = new Texture(Gdx.files.internal("images/bg.png"));
         sesc = new Texture(Gdx.files.internal("images/bgParrot.png"));
         stage.addActor(table);
+        Gdx.input.setCatchBackKey(true);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -73,7 +75,7 @@ public class Culture extends State {
 
         for (Obstacle obstacle: trees){
             if (camera.position.x - 650 >= obstacle.getPositionTop().x){
-                obstacle.reposition(camera.position.x + 460 + TREE_SPACING * TREE_COUNT);
+                obstacle.reposition(camera.position.x + TREE_SPACING * TREE_COUNT);
             }
             if (obstacle.collides(bird.getHitBox())){
                 Gdx.input.vibrate(300);
@@ -107,12 +109,12 @@ public class Culture extends State {
     public void dispose() {
         background.dispose();
         bird.getTexture().dispose();
-        stage.dispose();
         for (Obstacle obstacle : trees){
-            obstacle.getTextureBot().dispose();
             obstacle.getTextureTop().dispose();
+            obstacle.getTextureBot().dispose();
         }
-        scoreTable.dispose();
-        sesc.dispose();
+        stage.dispose();
+
     }
+
 }

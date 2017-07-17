@@ -45,9 +45,9 @@ public class Menu extends State {
         sesc = new Texture(Gdx.files.internal("images/sesc.png"));
         lion = new Animated("lion",.06f);
         btnCulture = new Image (new Texture(Gdx.files.internal("images/btnCulture.png")));
-        btnHealth = new Image (new Texture(Gdx.files.internal("images/btnHealth.png")));
+       // btnHealth = new Image (new Texture(Gdx.files.internal("images/btnHealth.png")));
         btnEducation = new Image(new Texture(Gdx.files.internal("images/btnEducation.png")));
-        btnFood = new Image(new Texture(Gdx.files.internal("images/btnFood.png")));
+       // btnFood = new Image(new Texture(Gdx.files.internal("images/btnFood.png")));
 
         //Listerners
         btnCulture.addListener(new InputListener(){
@@ -63,30 +63,29 @@ public class Menu extends State {
             }
         });
 
-        btnHealth.addListener(new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
+//        btnHealth.addListener(new InputListener(){
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                return true;
+//            }
+//
+//            @Override
+//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("Health State");
+//            }
+//        });
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Health State");
-            }
-        });
-
-        btnFood.addListener(new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Food State");
-                gsm.set(new Food(gsm));
-            }
-        });
+//        btnFood.addListener(new InputListener(){
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                return true;
+//            }
+//
+//            @Override
+//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                System.out.println("Food State");
+//            }
+//        });
 
         btnEducation.addListener(new InputListener(){
             @Override
@@ -104,9 +103,9 @@ public class Menu extends State {
         //Table Adds
         table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
         table.add(btnEducation).size(btnEducation.getWidth(),btnEducation.getHeight()).pad(10);
-        table.row();
-        table.add(btnFood).size(btnFood.getWidth(),btnFood.getHeight()).pad(10);
-        table.add(btnHealth).size(btnHealth.getWidth(),btnFood.getHeight()).pad(10);
+//        table.row();
+//        table.add(btnFood).size(btnFood.getWidth(),btnFood.getHeight()).pad(10);
+//        table.add(btnHealth).size(btnHealth.getWidth(),btnFood.getHeight()).pad(10);
         table.setFillParent(true);
         table.top().pad(360);
         //Table loads

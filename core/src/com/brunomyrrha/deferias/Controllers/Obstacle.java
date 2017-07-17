@@ -15,7 +15,7 @@ import java.util.Random;
 public class Obstacle {
     private static int VARIATION = 700;
     private static int GAP = 300;
-    private static int LOWEST = 50;
+    private static int LOWEST = 150;
     private static Texture treeTop, treeBot;
 
     private Rectangle hitBoxTop, hitBoxBot, points;
