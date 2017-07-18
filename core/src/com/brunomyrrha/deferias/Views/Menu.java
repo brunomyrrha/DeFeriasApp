@@ -61,7 +61,7 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Leader");
+                gsm.set(new Leaderboard(gsm,lm));
             }
         });
 
@@ -73,7 +73,7 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Culture State");
+                System.out.println("Bird game");
                 gsm.set(new Culture(gsm,lm));
             }
         });
@@ -86,7 +86,7 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Education State");
+                System.out.println("Words game");
                 gsm.set(new Education(gsm,lm));
             }
         });

@@ -31,7 +31,6 @@ public class Loading extends State {
         if (lm.loading()){
             gsm.set(new Menu(gsm,lm));
         }
-        System.out.println(gsm.getSize());
     }
 
     @Override

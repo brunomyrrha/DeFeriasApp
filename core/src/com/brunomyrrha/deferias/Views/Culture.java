@@ -112,7 +112,6 @@ public class Culture extends State {
         for(Obstacle obstacle : trees){
             sb.draw(obstacle.getTextureTop(),obstacle.getPositionTop().x,obstacle.getPositionTop().y);
             sb.draw(obstacle.getTextureBot(),obstacle.getPositionBot().x,obstacle.getPositionBot().y);
-//            System.out.println(obstacle.getPositionTop());
         }
         sb.draw(scoreTable,camera.position.x-scoreTable.getWidth()/2,Menu.HEIGHT-scoreTable.getHeight()+10);
         sb.draw(bird.getTexture(),bird.getPosition().x,bird.getPosition().y);
