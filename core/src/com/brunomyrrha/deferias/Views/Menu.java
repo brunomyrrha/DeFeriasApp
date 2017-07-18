@@ -26,12 +26,11 @@ public class Menu extends State {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 1280;
 
-    private Table table;
+    private Table table, tableProgram;
     private Stage stage;
     private Viewport viewport;
-    private KeyEvent event;
 
-    private Image btnCulture,btnEducation, btnLeaderboard;
+    private Image btnCulture,btnEducation, btnLeaderboard, btnProgram;
 
     private Texture background,sesc;
     private Animated lion;
@@ -41,6 +40,7 @@ public class Menu extends State {
         cam.setToOrtho(false,WIDTH,HEIGHT);
         viewport = new FitViewport(WIDTH,HEIGHT);
         table = new Table();
+        tableProgram = new Table();
         stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
 
@@ -48,11 +48,27 @@ public class Menu extends State {
         background = lm.getTexture("bg.png");
         sesc = lm.getTexture("sesc.png");
         lion = new Animated("lion",.06f,lm);
+
         btnLeaderboard = new Image(lm.getTexture("btnLeaderboard.png"));
         btnCulture = new Image (lm.getTexture("btnCulture.png"));
         btnEducation = new Image(lm.getTexture("btnEducation.png"));
+        btnProgram = new Image(lm.getTexture("btnProgram.png"));
 
         //Listerners
+
+        btnProgram.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Page loaded");
+                Gdx.net.openURI("https://www.facebook.com/SescPalladium/");
+            }
+        });
+
         btnLeaderboard.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -92,14 +108,20 @@ public class Menu extends State {
         });
 
         //Table Adds
-        table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
         table.add(btnEducation).size(btnEducation.getWidth(),btnEducation.getHeight()).pad(10);
+        table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
         table.add(btnLeaderboard).size(btnLeaderboard.getWidth(), btnLeaderboard.getHeight()).pad(10);
+
+        tableProgram.add(btnProgram).size(btnProgram.getWidth(),btnProgram.getHeight());
+        tableProgram.setFillParent(true);
+        tableProgram.top().pad(550);
+
         table.setFillParent(true);
-        table.top().pad(460);
+        table.top().padTop(360);
 
         //Table loads
         stage.addActor(table);
+        stage.addActor(tableProgram);
     }
 
 

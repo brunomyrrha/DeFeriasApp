@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
@@ -31,31 +34,34 @@ public class Culture extends State {
 
     private Bird bird;
     private Texture background, scoreTable, sesc;
+    private Image closeButton;
     private Viewport viewport;
     private Stage stage;
-    private Table table;
+    private Table table,closeTable;
     private Label label;
     private OrthographicCamera camera;
     private Obstacle tree;
     private Array<Obstacle> trees;
     private float seconds = 0;
 
-    public Culture(GameStateManager gsm, LoadManager lm) {
+    public Culture(final GameStateManager gsm, final LoadManager lm) {
         super(gsm, lm);
         camera = new OrthographicCamera();
         camera.setToOrtho(false,Menu.WIDTH,Menu.HEIGHT);
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchMenuKey(true);
-
 
         stage = new Stage(viewport);
         table = new Table();
+        closeTable = new Table();
+        closeTable.setFillParent(true);
+
 
         //Image Loads
         scoreTable = lm.getTexture("tipTableTexture.png");
         background = lm.getTexture("bg.png");
         sesc = lm.getTexture("bgParrot.png");
+        closeButton = new Image (lm.getTexture("btnClose.png"));
 
         table.setPosition(Menu.WIDTH/2-50,Menu.HEIGHT-195);
         bird = new Bird(lm);
@@ -66,6 +72,19 @@ public class Culture extends State {
             trees.add(new Obstacle(i*(TREE_SPACING + tree.getTextureTop().getWidth()+150),lm));
         }
 
+        closeButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.set(new Menu(gsm,lm));
+            }
+        });
+        closeTable.add(closeButton);
+        closeTable.top().left().pad(15);
         stage.addActor(table);
     }
 

@@ -32,6 +32,19 @@ public class Font {
         generator.dispose();
     }
 
+    public Font (int size){
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Zebrawood.otf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = size;
+        parameter.color = Color.valueOf("#7ac144");
+        parameter.borderColor = Color.valueOf("#0e8040");
+        parameter.borderWidth = 4;
+        font = generator.generateFont(parameter);
+        style = new Label.LabelStyle();
+        style.font = font;
+        generator.dispose();
+    }
+
     public Label getLabel(String text){
         return label = new Label(text, style);
     }

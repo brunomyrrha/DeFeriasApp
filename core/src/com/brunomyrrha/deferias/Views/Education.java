@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -30,25 +31,31 @@ public class Education extends State {
     private WordSelector wordSelector;
     private String word;
     private Array<Character> wordMatrix;
+    private int trys = 0;
 
     //TextButton loader
     private TextButton textButton;
     private Array<TextButton> matrix;
     private Skin skin;
     private Label label;
+    private Image closeButton;
 
     //Table and stage creators
     private Stage stage;
-    private Table table, tipTable;
+    private Table table, tipTable,closeTable;
     private Viewport viewport;
 
-    public Education(final GameStateManager gsm, LoadManager lm){
+    public Education(final GameStateManager gsm, final LoadManager lm){
         super(gsm,lm);
         //Stage, camera, settings
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage(viewport);
+
         table = new Table();
         tipTable = new Table();
+        closeTable = new Table();
+
+        closeTable.setFillParent(true);
         table.setFillParent(true);
         tipTable.setFillParent(true);
         Gdx.input.setInputProcessor(stage);
@@ -56,6 +63,7 @@ public class Education extends State {
         //Image loader
         background = lm.getTexture("bgSesc.png");
         tipTableTexture = lm.getTexture("tipTableTexture.png");
+        closeButton = new Image(lm.getTexture("btnClose.png"));
 
         //Word loader, chooser, constructor
         wordMatrix = new Array<Character>();
@@ -71,8 +79,25 @@ public class Education extends State {
         generateMatrix(word);
         addTable();
         table.padTop(150);
+
+        closeButton.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.set(new Menu(gsm,lm));
+            }
+        });
+        closeTable.add(closeButton);
+        closeTable.top().left().pad(15);
+
+
         stage.addActor(table);
         stage.addActor(tipTable);
+        stage.addActor(closeTable);
         System.out.println(word);
     }
 
@@ -116,6 +141,7 @@ public class Education extends State {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    trys++;
                     reset();
                 }
             });
@@ -167,7 +193,7 @@ public class Education extends State {
     @Override
     protected void handleInput() {
         if (win()){
-            gsm.set(new Victory(gsm,word,lm));
+            gsm.set(new Victory(gsm,word,trys,lm));
         }
     }
 

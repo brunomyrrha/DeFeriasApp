@@ -1,6 +1,7 @@
 package com.brunomyrrha.deferias.Views;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -24,21 +25,27 @@ public class Leaderboard extends State {
     private Texture background;
     private Image button;
     private Stage stage;
-    private Table okTable, table;
+    private Table okTable, table, scoreTable;
     private Viewport viewport;
     private Texture nameTable;
-    private Label label;
+    private Image birdIcon, wordIcon;
+    private Label label,seconds, trys;
 
     protected Leaderboard(final GameStateManager gsm, final LoadManager lm) {
         super(gsm, lm);
         cam.setToOrtho(false, Menu.WIDTH,Menu.HEIGHT);
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage (viewport);
+
         label = DeFerias.FONT.getLabel("Recordes");
+        seconds = DeFerias.FONT.getLabel("10 segundos"); //VALOR DE TESTE ALTERAR <<<<<<<<<<<<<<<<<<<<<<<<<
+        trys = DeFerias.FONT.getLabel("10 erros"); //VALOR DE TESTE ALTERAR <<<<<<<<<<<<<<<<<<<<<<<<<
 
         background = lm.getTexture("bgSesc.png");
         button = new Image(lm.getTexture("btnOk.png"));
         nameTable = lm.getTexture("tipTableTexture.png");
+        birdIcon = new Image(lm.getTexture("btnCulture.png"));
+        wordIcon = new Image(lm.getTexture("btnEducation.png"));
 
         button.addListener(new InputListener(){
             @Override
@@ -53,14 +60,32 @@ public class Leaderboard extends State {
         });
 
         Gdx.input.setInputProcessor(stage);
+
         okTable = new Table();
         table = new Table();
+
+        scoreTable = new Table();
+        scoreTable.setFillParent(true);
+
+
+        scoreTable.add(birdIcon).size(birdIcon.getWidth()*1.2f,birdIcon.getHeight()*1.2f);
+        scoreTable.row();
+        scoreTable.add(seconds);
+        scoreTable.row();
+        scoreTable.add(wordIcon).size(wordIcon.getWidth()*1.2f,birdIcon.getHeight()*1.2f).padTop(30);
+        scoreTable.row();
+        scoreTable.add(trys);
+        scoreTable.top().padTop(250);
+
         table.add(label);
         table.setFillParent(true);
         table.top().padTop(50);
+
         okTable.add(button);
         okTable.setFillParent(true);
-        okTable.bottom().padBottom(250);
+        okTable.bottom().padBottom(150);
+
+        stage.addActor(scoreTable);
         stage.addActor(okTable);
         stage.addActor(table);
     }
