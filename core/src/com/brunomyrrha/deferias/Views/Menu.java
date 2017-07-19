@@ -114,7 +114,7 @@ public class Menu extends State {
 
         tableProgram.add(btnProgram).size(btnProgram.getWidth(),btnProgram.getHeight());
         tableProgram.setFillParent(true);
-        tableProgram.top().pad(550);
+        tableProgram.bottom().padBottom(10);
 
         table.setFillParent(true);
         table.top().padTop(360);
@@ -141,7 +141,7 @@ public class Menu extends State {
         sb.begin();
         sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),150,40);
+        sb.draw(lion.textureRegion(),150,200);
         sb.draw(sesc,0,0);
         sb.end();
         stage.draw();

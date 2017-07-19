@@ -113,7 +113,7 @@ public class Culture extends State {
             }
             if (obstacle.collides(bird.getHitBox())){
                 Gdx.input.vibrate(300);
-                gsm.set(new Victory(gsm,Math.round(seconds)+" segundos",lm));
+                gsm.set(new Victory(gsm,Math.round(seconds),lm));
             }
         }
         seconds += Gdx.graphics.getRawDeltaTime();
