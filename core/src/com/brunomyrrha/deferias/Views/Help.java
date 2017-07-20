@@ -21,7 +21,7 @@ import com.brunomyrrha.deferias.DeFerias;
  * Created by brunomyrrha on 17/07/2017.
  */
 
-public class Leaderboard extends State {
+public class Help extends State {
     private Texture background;
     private Image button;
     private Stage stage;
@@ -31,21 +31,43 @@ public class Leaderboard extends State {
     private Image birdIcon, wordIcon;
     private Label label,seconds, trys;
 
-    protected Leaderboard(final GameStateManager gsm, final LoadManager lm) {
+    protected Help(final GameStateManager gsm, final LoadManager lm) {
         super(gsm, lm);
         cam.setToOrtho(false, Menu.WIDTH,Menu.HEIGHT);
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage (viewport);
 
-        label = DeFerias.FONT.getLabel("Recordes");
-        seconds = DeFerias.FONT.getLabel("10 segundos"); //VALOR DE TESTE ALTERAR <<<<<<<<<<<<<<<<<<<<<<<<<
-        trys = DeFerias.FONT.getLabel("10 erros"); //VALOR DE TESTE ALTERAR <<<<<<<<<<<<<<<<<<<<<<<<<
+        label = DeFerias.FONT.getLabel("Como jogar");
 
         background = lm.getTexture("bgSesc.png");
-        button = new Image(lm.getTexture("btnOk.png"));
+        button = new Image(lm.getTexture("btnBack.png"));
         nameTable = lm.getTexture("tipTableTexture.png");
-        birdIcon = new Image(lm.getTexture("btnCulture.png"));
-        wordIcon = new Image(lm.getTexture("btnEducation.png"));
+        birdIcon = new Image(lm.getTexture("birdScreen.png"));
+        wordIcon = new Image(lm.getTexture("wordScreen.png"));
+
+        birdIcon.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.set(new CultureHelp(gsm,lm));
+            }
+        });
+
+        wordIcon.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                gsm.set(new EducationHelp(gsm,lm));
+            }
+        });
 
         button.addListener(new InputListener(){
             @Override
@@ -68,14 +90,9 @@ public class Leaderboard extends State {
         scoreTable.setFillParent(true);
 
 
-        scoreTable.add(birdIcon).size(birdIcon.getWidth()*1.2f,birdIcon.getHeight()*1.2f);
-        scoreTable.row();
-        scoreTable.add(seconds);
-        scoreTable.row();
-        scoreTable.add(wordIcon).size(wordIcon.getWidth()*1.2f,birdIcon.getHeight()*1.2f).padTop(30);
-        scoreTable.row();
-        scoreTable.add(trys);
-        scoreTable.top().padTop(250);
+        scoreTable.add(birdIcon).pad(7);
+        scoreTable.add(wordIcon).pad(7);
+        scoreTable.top().padTop(300);
 
         table.add(label);
         table.setFillParent(true);

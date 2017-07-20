@@ -15,8 +15,6 @@ import com.brunomyrrha.deferias.Controllers.GameStateManager;
 import com.brunomyrrha.deferias.Controllers.LoadManager;
 import com.brunomyrrha.deferias.Controllers.State;
 
-import java.awt.event.KeyEvent;
-
 /**
  * Created by brunomyrrha on 12/07/17.
  */
@@ -30,7 +28,7 @@ public class Menu extends State {
     private Stage stage;
     private Viewport viewport;
 
-    private Image btnCulture,btnEducation, btnLeaderboard, btnProgram;
+    private Image btnCulture,btnEducation, btnHelp, btnProgram;
 
     private Texture background,sesc;
     private Animated lion;
@@ -49,7 +47,7 @@ public class Menu extends State {
         sesc = lm.getTexture("sesc.png");
         lion = new Animated("lion",.06f,lm);
 
-        btnLeaderboard = new Image(lm.getTexture("btnLeaderboard.png"));
+        btnHelp = new Image(lm.getTexture("btnHelp.png"));
         btnCulture = new Image (lm.getTexture("btnCulture.png"));
         btnEducation = new Image(lm.getTexture("btnEducation.png"));
         btnProgram = new Image(lm.getTexture("btnProgram.png"));
@@ -69,7 +67,7 @@ public class Menu extends State {
             }
         });
 
-        btnLeaderboard.addListener(new InputListener(){
+        btnHelp.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -77,7 +75,7 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                gsm.set(new Leaderboard(gsm,lm));
+                gsm.set(new Help(gsm,lm));
             }
         });
 
@@ -110,7 +108,7 @@ public class Menu extends State {
         //Table Adds
         table.add(btnEducation).size(btnEducation.getWidth(),btnEducation.getHeight()).pad(10);
         table.add(btnCulture).size(btnCulture.getWidth(),btnCulture.getHeight()).pad(10);
-        table.add(btnLeaderboard).size(btnLeaderboard.getWidth(), btnLeaderboard.getHeight()).pad(10);
+        table.add(btnHelp).size(btnHelp.getWidth(), btnHelp.getHeight()).pad(10);
 
         tableProgram.add(btnProgram).size(btnProgram.getWidth(),btnProgram.getHeight());
         tableProgram.setFillParent(true);
