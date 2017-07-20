@@ -13,11 +13,9 @@ import com.brunomyrrha.deferias.Controllers.State;
 
 public class CultureHelp extends State {
     private Texture background;
-    private Texture back;
     protected CultureHelp(GameStateManager gsm, LoadManager lm) {
         super(gsm, lm);
         background = lm.getTexture("helpBird.png");
-        back = lm.getTexture("btnBack.png");
     }
 
     @Override
@@ -36,7 +34,6 @@ public class CultureHelp extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background,0,0);
-        sb.draw(back, Menu.WIDTH/2-back.getWidth()/2,150);
         sb.end();
     }
 

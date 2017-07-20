@@ -13,13 +13,10 @@ import com.brunomyrrha.deferias.Controllers.State;
 
 public class EducationHelp extends State {
     private Texture background;
-    private Texture back;
 
     protected EducationHelp(GameStateManager gsm, LoadManager lm) {
         super(gsm, lm);
         background = lm.getTexture("helpWord.png");
-        back = lm.getTexture("btnBack.png");
-
     }
 
     @Override
@@ -38,7 +35,6 @@ public class EducationHelp extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background,0,0);
-        sb.draw(back, Menu.WIDTH/2-back.getWidth()/2,150);
         sb.end();
     }
 

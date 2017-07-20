@@ -28,8 +28,8 @@ import com.brunomyrrha.deferias.DeFerias;
  */
 
 public class Culture extends State {
-    private static final int TREE_COUNT = 2;
-    private int TREE_SPACING = 250;
+    private static final int TREE_COUNT = 3;
+    private int TREE_SPACING = 200;
     private float time;
 
     private Bird bird;
@@ -94,8 +94,8 @@ public class Culture extends State {
             bird.jump();
         }
         time+=Gdx.graphics.getRawDeltaTime();
-        if (Math.round(time) % 10 == 0){
-            TREE_SPACING++;
+        if (Math.round(time) % 20 == 0){
+            TREE_SPACING = (TREE_SPACING+TREE_SPACING)/2;
         }
 
     }
@@ -109,7 +109,7 @@ public class Culture extends State {
 
         for (Obstacle obstacle: trees){
             if (camera.position.x - 650 >= obstacle.getPositionTop().x){
-                obstacle.reposition(camera.position.x + TREE_SPACING * TREE_COUNT);
+                obstacle.reposition(camera.position.x-650 + (tree.getTextureTop().getWidth() + TREE_SPACING + 150)*TREE_COUNT);
             }
             if (obstacle.collides(bird.getHitBox())){
                 Gdx.input.vibrate(300);

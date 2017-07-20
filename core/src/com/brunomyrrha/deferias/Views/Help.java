@@ -37,7 +37,7 @@ public class Help extends State {
         viewport = new FitViewport(Menu.WIDTH,Menu.HEIGHT);
         stage = new Stage (viewport);
 
-        label = DeFerias.FONT.getLabel("Como jogar");
+        label = DeFerias.FONT.getLabel("Ajuda");
 
         background = lm.getTexture("bgSesc.png");
         button = new Image(lm.getTexture("btnBack.png"));

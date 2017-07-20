@@ -25,7 +25,7 @@ public class Bird {
         position = new Vector2(0,Menu.HEIGHT/2);
         velocity = new Vector2(0,0);
         speed = 1;
-        hitBox = new Rectangle(bird.getWidth()/3,bird.getHeight()/4,bird.getWidth()/2,bird.getHeight()/2);
+        hitBox = new Rectangle(bird.getWidth()/4 ,bird.getHeight()/4,bird.getWidth()/2,bird.getHeight()/2);
     }
 
     public void update(float deltaTime){
