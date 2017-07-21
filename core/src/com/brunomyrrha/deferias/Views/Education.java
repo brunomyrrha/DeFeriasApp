@@ -98,7 +98,6 @@ public class Education extends State {
         stage.addActor(table);
         stage.addActor(tipTable);
         stage.addActor(closeTable);
-        System.out.println(word);
     }
 
     private void generateMatrix(String word){

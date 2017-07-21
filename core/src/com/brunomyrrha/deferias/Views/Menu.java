@@ -62,8 +62,7 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Page loaded");
-                Gdx.net.openURI("https://www.facebook.com/SescPalladium/");
+                Gdx.net.openURI("http://bit.ly/2uDrhPJ");
             }
         });
 
@@ -87,7 +86,6 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Bird game");
                 gsm.set(new Culture(gsm,lm));
             }
         });
@@ -100,7 +98,6 @@ public class Menu extends State {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("Words game");
                 gsm.set(new Education(gsm,lm));
             }
         });
@@ -112,7 +109,7 @@ public class Menu extends State {
 
         tableProgram.add(btnProgram).size(btnProgram.getWidth(),btnProgram.getHeight());
         tableProgram.setFillParent(true);
-        tableProgram.bottom().padBottom(10);
+        tableProgram.bottom().padBottom(110);
 
         table.setFillParent(true);
         table.top().padTop(360);
@@ -139,7 +136,7 @@ public class Menu extends State {
         sb.begin();
         sb.draw(background,0,0);
         lion.draw();
-        sb.draw(lion.textureRegion(),150,200);
+        sb.draw(lion.textureRegion(),150,170);
         sb.draw(sesc,0,0);
         sb.end();
         stage.draw();

@@ -89,9 +89,8 @@ public class Help extends State {
         scoreTable = new Table();
         scoreTable.setFillParent(true);
 
-
-        scoreTable.add(birdIcon).pad(7);
         scoreTable.add(wordIcon).pad(7);
+        scoreTable.add(birdIcon).pad(7);
         scoreTable.top().padTop(300);
 
         table.add(label);
